@@ -127,7 +127,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BitacoraEstadosDelCarro.cpp" />
+    <ClCompile Include="Carro.cpp" />
+    <ClCompile Include="Cliente.cpp" />
+    <ClCompile Include="ClienteJuridico.cpp" />
+    <ClCompile Include="ClienteNormal.cpp" />
+    <ClCompile Include="Colaborador.cpp" />
+    <ClCompile Include="ContenedorClientes.cpp" />
+    <ClCompile Include="ContenedorColaboradores.cpp" />
+    <ClCompile Include="ContenedorContratoAlquiler.cpp" />
+    <ClCompile Include="ContenedorPlanteles.cpp" />
+    <ClCompile Include="ContenedorSolicitudAlquiler.cpp" />
+    <ClCompile Include="ContenedorSucursal.cpp" />
+    <ClCompile Include="ContratoAlquiler.cpp" />
+    <ClCompile Include="EspacioEstacionamiento.cpp" />
+    <ClCompile Include="HistorialCliente.cpp" />
+    <ClCompile Include="Interfaz.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NodoCliente.cpp" />
+    <ClCompile Include="NodoColaborador.cpp" />
+    <ClCompile Include="NodoContratoAlquiler.cpp" />
+    <ClCompile Include="NodoPlantel.cpp" />
+    <ClCompile Include="NodoSolicitudAlquiler.cpp" />
+    <ClCompile Include="NodoSucursal.cpp" />
+    <ClCompile Include="Plantel.cpp" />
+    <ClCompile Include="SolicitudAlquiler.cpp" />
+    <ClCompile Include="Sucursal.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BitacoraEstadosDelCarro.h" />
+    <ClInclude Include="Carro.h" />
+    <ClInclude Include="Cliente.h" />
+    <ClInclude Include="ClienteJuridico.h" />
+    <ClInclude Include="ClienteNormal.h" />
+    <ClInclude Include="Colaborador.h" />
+    <ClInclude Include="ContenedorClientes.h" />
+    <ClInclude Include="ContenedorColaboradores.h" />
+    <ClInclude Include="ContenedorContratoAlquiler.h" />
+    <ClInclude Include="ContenedorPlanteles.h" />
+    <ClInclude Include="ContenedorSolicitudAlquiler.h" />
+    <ClInclude Include="ContenedorSucursal.h" />
+    <ClInclude Include="ContratoAlquiler.h" />
+    <ClInclude Include="EspacioEstacionamiento.h" />
+    <ClInclude Include="HistorialCliente.h" />
+    <ClInclude Include="Interfaz.h" />
+    <ClInclude Include="NodoCliente.h" />
+    <ClInclude Include="NodoColaborador.h" />
+    <ClInclude Include="NodoContratoAlquiler.h" />
+    <ClInclude Include="NodoPlantel.h" />
+    <ClInclude Include="NodoSolicitudAlquiler.h" />
+    <ClInclude Include="NodoSucursal.h" />
+    <ClInclude Include="Plantel.h" />
+    <ClInclude Include="SolicitudAlquiler.h" />
+    <ClInclude Include="Sucursal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
