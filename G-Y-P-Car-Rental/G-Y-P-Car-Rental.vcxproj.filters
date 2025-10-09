@@ -18,5 +18,157 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ContenedorSucursal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sucursal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Carro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cliente.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClienteNormal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClienteJuridico.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plantel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContenedorClientes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Colaborador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContenedorColaboradores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SolicitudAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContratoAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EspacioEstacionamiento.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BitacoraEstadosDelCarro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContenedorPlanteles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistorialCliente.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoCliente.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoColaborador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoPlantel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoSucursal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoSolicitudAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoContratoAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContenedorContratoAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContenedorSolicitudAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interfaz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ContenedorSucursal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sucursal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Carro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cliente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClienteNormal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClienteJuridico.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plantel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorClientes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Colaborador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorColaboradores.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SolicitudAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContratoAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EspacioEstacionamiento.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BitacoraEstadosDelCarro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorPlanteles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistorialCliente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoCliente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoColaborador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoPlantel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoSucursal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoSolicitudAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoContratoAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorContratoAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorSolicitudAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
