@@ -133,6 +133,7 @@
     <ClCompile Include="ClienteJuridico.cpp" />
     <ClCompile Include="ClienteNormal.cpp" />
     <ClCompile Include="Colaborador.cpp" />
+    <ClCompile Include="ContenedorBitacoras.cpp" />
     <ClCompile Include="ContenedorClientes.cpp" />
     <ClCompile Include="ContenedorColaboradores.cpp" />
     <ClCompile Include="ContenedorContratoAlquiler.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="ClienteJuridico.h" />
     <ClInclude Include="ClienteNormal.h" />
     <ClInclude Include="Colaborador.h" />
+    <ClInclude Include="ContenedorBitacoras.h" />
     <ClInclude Include="ContenedorClientes.h" />
     <ClInclude Include="ContenedorColaboradores.h" />
     <ClInclude Include="ContenedorContratoAlquiler.h" />
