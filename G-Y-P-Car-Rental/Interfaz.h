@@ -6,15 +6,15 @@ using namespace std;
 
 class InterfazUsuario {
 private:
-    // ⚙️ Único contenedor global del sistema
+    //  Único contenedor global del sistema
     static ContenedorSucursal* contenedorSucursales;
 
 public:
-    // 🚀 Menú principal
+    //  Menú principal
     static void menuPrincipal();
 
     // ============================
-    // 1️⃣ Datos Generales
+    //  Datos Generales
     // ============================
     static void menuDatosGenerales();
     static void menuSucursales();
@@ -22,17 +22,17 @@ public:
     static void menuColaboradores();
 
     // ============================
-    // 2️⃣ Planteles y Vehículos
+    // Planteles y Vehículos
     // ============================
     static void menuPlantelesVehiculos();
 
     // ============================
-    // 3️⃣ Solicitudes y Contratos
+    //  Solicitudes y Contratos
     // ============================
     static void menuSolicitudesContratos();
 
     // ============================
-    // 4️⃣ Reportes
+    //  Reportes
     // ============================
     static void menuReportesClientes();
     static void menuReportesPlantelesAlquileres();

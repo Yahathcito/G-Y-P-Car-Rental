@@ -2,12 +2,12 @@
 #include <cstdlib>
 
 // =====================================================
-// 🧱 Inicialización del contenedor raíz
+//  Inicialización del contenedor raíz
 // =====================================================
 ContenedorSucursal* InterfazUsuario::contenedorSucursales = new ContenedorSucursal();
 
 // =====================================================
-// 🚀 MENÚ PRINCIPAL
+//  MENÚ PRINCIPAL
 // =====================================================
 void InterfazUsuario::menuPrincipal() {
     int opcion;
@@ -39,7 +39,7 @@ void InterfazUsuario::menuPrincipal() {
 }
 
 // =====================================================
-// 1️⃣ DATOS GENERALES
+//  DATOS GENERALES
 // =====================================================
 void InterfazUsuario::menuDatosGenerales() {
     int opcion;
@@ -67,7 +67,7 @@ void InterfazUsuario::menuDatosGenerales() {
 }
 
 // =====================================================
-// 1.1️⃣ Sucursales
+//  Sucursales
 // =====================================================
 void InterfazUsuario::menuSucursales() {
     int opcion;
@@ -100,7 +100,7 @@ void InterfazUsuario::menuSucursales() {
 }
 
 // =====================================================
-// 1.2️⃣ Clientes
+//  Clientes
 // =====================================================
 void InterfazUsuario::menuClientes() {
     int opcion;
@@ -136,7 +136,7 @@ void InterfazUsuario::menuClientes() {
 }
 
 // =====================================================
-// 1.3️⃣ Colaboradores
+//  Colaboradores
 // =====================================================
 void InterfazUsuario::menuColaboradores() {
     int opcion;
@@ -168,7 +168,7 @@ void InterfazUsuario::menuColaboradores() {
 }
 
 // =====================================================
-// 2️⃣ PLANTELES Y VEHÍCULOS
+//  PLANTELES Y VEHÍCULOS
 // =====================================================
 void InterfazUsuario::menuPlantelesVehiculos() {
     int opcion;
@@ -214,7 +214,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
 }
 
 // =====================================================
-// 3️⃣ SOLICITUDES Y CONTRATOS
+//  SOLICITUDES Y CONTRATOS
 // =====================================================
 void InterfazUsuario::menuSolicitudesContratos() {
     int opcion;
@@ -256,7 +256,7 @@ void InterfazUsuario::menuSolicitudesContratos() {
 }
 
 // =====================================================
-// 4️⃣ REPORTES DE CLIENTES
+//  REPORTES DE CLIENTES
 // =====================================================
 void InterfazUsuario::menuReportesClientes() {
     int opcion;
@@ -286,7 +286,7 @@ void InterfazUsuario::menuReportesClientes() {
 }
 
 // =====================================================
-// 5️⃣ REPORTES DE PLANTELES Y ALQUILERES
+//  REPORTES DE PLANTELES Y ALQUILERES
 // =====================================================
 void InterfazUsuario::menuReportesPlantelesAlquileres() {
     int opcion;
