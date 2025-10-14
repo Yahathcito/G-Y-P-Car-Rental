@@ -102,6 +102,9 @@
     <ClCompile Include="NodoCarro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NodoBitacorasEstadoDelCarro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContenedorSucursal.h">
@@ -186,6 +189,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodoCarro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoBitacorasEstadoDelCarro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
