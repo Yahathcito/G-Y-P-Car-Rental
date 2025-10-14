@@ -2,17 +2,18 @@
 #include <iostream>	
 #include <string>
 #include <sstream>
+#include "EspacioEstacionamiento.h"
 using namespace std;
 
 class Plantel
 {
 	private :
 		string id;
-		int capacidadMaxima;
-		string tipoVehiculo[4];
-
+		int filas; 
+		int columnas;
+		EspacioEstacionamiento*** espacio; 
 public:
-	Plantel(string, int, string[]);
+	Plantel(string,int,int);
 		string getId();
 		int getCapacidadMaxima();
 		string* getTipoVehiculo();

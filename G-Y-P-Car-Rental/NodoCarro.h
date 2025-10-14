@@ -10,9 +10,9 @@ public:
 	NodoCarro(Carro*,NodoCarro*);
 	~NodoCarro();
 	Carro* getCarro();
-	Carro* setCarro(Carro* carro);
+	Carro* setCarro(Carro*);
 	NodoCarro* getSiguiente();
-	NodoCarro* setSiguiente(NodoCarro* siguiente);
+	NodoCarro* setSiguiente(NodoCarro*);
 
 };
 

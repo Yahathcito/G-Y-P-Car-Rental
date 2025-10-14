@@ -23,9 +23,6 @@ string Cliente::getNombre() {
     return nombre;
 }
 
-Plantel::Plantel(string, int, string[])
-{
-}
 
 string Cliente::getId() {
     return id;
