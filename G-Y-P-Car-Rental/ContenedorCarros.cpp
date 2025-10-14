@@ -16,5 +16,8 @@ ContenedorCarros::~ContenedorCarros()
 		actual = siguiente;
 	}
 }
-
+bool ContenedorCarros::estaVacio()
+{
+	return cabeza == nullptr;
+}
 
