@@ -81,11 +81,11 @@ void InterfazUsuario::menuSucursales() {
         cout << "---------------------------------------\n";
         cout << "Opción: ";
         cin >> opcion;
-
+        
         switch (opcion) {
         case 1:
-            // Ejemplo:
-            // contenedorSucursales->registrarSucursal();
+           
+
             break;
         case 2:
             // contenedorSucursales->eliminarSucursal();

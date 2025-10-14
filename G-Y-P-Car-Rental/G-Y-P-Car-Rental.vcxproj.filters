@@ -96,6 +96,12 @@
     <ClCompile Include="ContenedorBitacoras.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ContenedorCarros.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoCarro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContenedorSucursal.h">
@@ -174,6 +180,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ContenedorBitacoras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContenedorCarros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoCarro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
