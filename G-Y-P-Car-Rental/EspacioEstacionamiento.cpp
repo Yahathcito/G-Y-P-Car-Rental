@@ -2,7 +2,12 @@
 
 EspacioEstacionamiento::EspacioEstacionamiento(string idEspacio) {
 	this->idEspacio = idEspacio;
-	this->disponible = true; // Inicialmente, el espacio está disponible
+	this->disponible = true; 
+	this->carroEstacionado = nullptr;
+}
+EspacioEstacionamiento::~EspacioEstacionamiento(){
+	if (disponible) return;
+	carroEstacionado = nullptr;
 }
 string EspacioEstacionamiento::getIdEspacio() {
 	return idEspacio;
@@ -12,6 +17,15 @@ bool EspacioEstacionamiento::isDisponible() {
 }
 void EspacioEstacionamiento::setDisponible(bool disponible) {
 	this->disponible = disponible;
+}
+
+bool EspacioEstacionamiento::estacionarCarro(Carro* carro){
+	if (disponible) {
+		carroEstacionado = carro;
+		disponible = false;
+		return true;
+	}
+	return false;
 }
 
 string EspacioEstacionamiento::toString() {

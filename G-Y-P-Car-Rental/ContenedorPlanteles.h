@@ -1,5 +1,12 @@
 #pragma once
-class ContenedorPlanteles
-{
+#include "NodoPlantel.h"
+class ContenedorPlanteles{
+	private: 
+		NodoPlantel* ppio; 
+	public:
+		ContenedorPlanteles(); 
+		virtual ~ContenedorPlanteles(); 
+		bool agregarPlantel(Plantel*);
+		bool estaVacio(); 
 };
 
