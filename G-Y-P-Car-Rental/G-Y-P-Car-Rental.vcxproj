@@ -134,6 +134,7 @@
     <ClCompile Include="ClienteNormal.cpp" />
     <ClCompile Include="Colaborador.cpp" />
     <ClCompile Include="ContenedorBitacoras.cpp" />
+    <ClCompile Include="ContenedorCarros.cpp" />
     <ClCompile Include="ContenedorClientes.cpp" />
     <ClCompile Include="ContenedorColaboradores.cpp" />
     <ClCompile Include="ContenedorContratoAlquiler.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="HistorialCliente.cpp" />
     <ClCompile Include="Interfaz.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NodoCarro.cpp" />
     <ClCompile Include="NodoCliente.cpp" />
     <ClCompile Include="NodoColaborador.cpp" />
     <ClCompile Include="NodoContratoAlquiler.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="ClienteNormal.h" />
     <ClInclude Include="Colaborador.h" />
     <ClInclude Include="ContenedorBitacoras.h" />
+    <ClInclude Include="ContenedorCarros.h" />
     <ClInclude Include="ContenedorClientes.h" />
     <ClInclude Include="ContenedorColaboradores.h" />
     <ClInclude Include="ContenedorContratoAlquiler.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="EspacioEstacionamiento.h" />
     <ClInclude Include="HistorialCliente.h" />
     <ClInclude Include="Interfaz.h" />
+    <ClInclude Include="NodoCarro.h" />
     <ClInclude Include="NodoCliente.h" />
     <ClInclude Include="NodoColaborador.h" />
     <ClInclude Include="NodoContratoAlquiler.h" />

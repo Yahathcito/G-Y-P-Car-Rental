@@ -1,4 +1,5 @@
 #include "Cliente.h"
+#include "Plantel.h"
 
 Cliente::Cliente(string nombre, string id, string paisResidencia) {
     this->nombre = nombre;
@@ -20,6 +21,10 @@ void Cliente::setPaisResidencia(string paisResidencia) {
 
 string Cliente::getNombre() {
     return nombre;
+}
+
+Plantel::Plantel(string, int, string[])
+{
 }
 
 string Cliente::getId() {
