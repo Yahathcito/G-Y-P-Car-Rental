@@ -23,7 +23,6 @@ string Cliente::getNombre() {
     return nombre;
 }
 
-
 string Cliente::getId() {
     return id;
 }

@@ -146,6 +146,7 @@
     <ClCompile Include="HistorialCliente.cpp" />
     <ClCompile Include="Interfaz.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NodoBitacorasEstadoDelCarro.cpp" />
     <ClCompile Include="NodoCarro.cpp" />
     <ClCompile Include="NodoCliente.cpp" />
     <ClCompile Include="NodoColaborador.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="EspacioEstacionamiento.h" />
     <ClInclude Include="HistorialCliente.h" />
     <ClInclude Include="Interfaz.h" />
+    <ClInclude Include="NodoBitacorasEstadoDelCarro.h" />
     <ClInclude Include="NodoCarro.h" />
     <ClInclude Include="NodoCliente.h" />
     <ClInclude Include="NodoColaborador.h" />

@@ -27,7 +27,7 @@ string Plantel::toString() {
 	stringstream s;
 	s << "---------------------------------------\n";
 	s << "ID del Plantel: " << id << endl;
-	s << "Capacidad Máxima: " << filas*columnas << endl;
+	s << "Capacidad Mï¿½xima: " << filas*columnas << endl;
 	s << "---------------------------------------\n";
 	for (int i = 0; i < filas;i++) {
 		for (int j = 0; j < filas;j++) {
