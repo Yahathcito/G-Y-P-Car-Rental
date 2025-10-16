@@ -10,8 +10,7 @@ class InterfazUsuario {
 private:
     //  Único contenedor global del sistema
     static ContenedorSucursal* contenedorSucursales;
-    static ContenedorColaboradores* contenedorColaboradores;
-  
+	
 
 public:
     //  Menú principal
