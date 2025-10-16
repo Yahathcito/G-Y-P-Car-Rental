@@ -52,7 +52,7 @@ string Sucursal::getNumUnico()
 
 string Sucursal::toString() {
 	stringstream s;
-	s << "Número Unico de Sucursal: " << numUnicoSucursal << endl;
+	s << "Numero Unico de Sucursal: " << numUnicoSucursal << endl;
 	s << "Provincia: " << provincia << endl;
 	return s.str();
 }
