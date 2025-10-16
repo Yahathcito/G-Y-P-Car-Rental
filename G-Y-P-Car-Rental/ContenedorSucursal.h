@@ -12,5 +12,7 @@ class ContenedorSucursal{
 		bool validarSucursal(string);
 		bool estaVacio(); 
 		string toString();
+		//Colaboradores 
+		Sucursal* getSucursalActual();
 };
 

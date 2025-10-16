@@ -1,5 +1,7 @@
 #pragma once
 #include "Cliente.h"
+
+
 class NodoCliente{
 	private: 
 		Cliente* cliente; 

@@ -1,5 +1,5 @@
 ﻿#include "Interfaz.h"
-#include <cstdlib>
+
 
 // =====================================================
 //  Inicialización del contenedor raíz
@@ -11,6 +11,11 @@ ContenedorSucursal* InterfazUsuario::contenedorSucursales = new ContenedorSucurs
 // =====================================================
 void InterfazUsuario::menuPrincipal() {
     int opcion;
+    if (!contenedorSucursales) {
+        contenedorSucursales = new ContenedorSucursal();
+	}
+
+
     do {
         system("cls");
         cout << "=============================================\n";
@@ -72,7 +77,9 @@ void InterfazUsuario::menuDatosGenerales() {
 void InterfazUsuario::menuSucursales() {
     int opcion;
     string codigo, provincia;
+
     do {
+
         system("cls");
         cout << "-------- Gestion de Sucursales --------\n";
         cout << "1. Registrar nueva sucursal\n";
@@ -85,14 +92,16 @@ void InterfazUsuario::menuSucursales() {
         
         switch (opcion) {
         case 1: {
-            cout << "Ingrese el codigo unico de la sucursal: "; cin >> codigo;
+
+            /*cout << "Ingrese el codigo unico de la sucursal: "; cin >> codigo;
             cout << "Ingrese la provincia de la sucursal: "; cin >> provincia;
             if (!contenedorSucursales->validarSucursal(codigo)) {
                 cout << "Error: Ya existe una sucursal con ese codigo.\n";
                 system("pause");
                 break;
             }
-            Sucursal* nuevaSucursal = new Sucursal(codigo, provincia);
+            Sucursal* nuevaSucursal = new Sucursal(codigo, provincia);*/
+			Sucursal* nuevaSucursal = new Sucursal("111","Heredia");
             contenedorSucursales->agregarSucursal(nuevaSucursal);
             cout << "Sucursal agregada exitosamente!\n"; 
             system("pause");
@@ -100,6 +109,7 @@ void InterfazUsuario::menuSucursales() {
 
         }
         case 2: {
+
             cout << "Ingrese el codigo de la sucursal que desea eliminar: "; cin >> codigo; 
             if (contenedorSucursales->validarSucursal(codigo)) {
                 cout << "Error: No existe una sucursal con este codigo.\n";
@@ -128,11 +138,15 @@ void InterfazUsuario::menuSucursales() {
 // =====================================================
 void InterfazUsuario::menuClientes() {
     int opcion;
+    string nombre, id, pais, codigo, actividadEconomica;
+	Cliente* cliente = nullptr;
+	Sucursal* sucursalActual = nullptr;
+    
     do {
         system("cls");
         cout << "-------- Gestión de Clientes --------\n";
         cout << "1. Registrar cliente normal\n";
-        cout << "2. Registrar cliente jurídico\n";
+        cout << "2. Registrar cliente juridico\n";
         cout << "3. Eliminar cliente\n";
         cout << "4. Mostrar todos los clientes\n";
         cout << "0. Volver\n";
@@ -142,21 +156,134 @@ void InterfazUsuario::menuClientes() {
 
         switch (opcion) {
         case 1:
-            // contenedorSucursales->getSucursalActual()->getContenedorClientes()->agregarClienteNormal();
-            break;
+            
+			
+			do {
+				system("cls");
+                if (!contenedorSucursales || contenedorSucursales->estaVacio()) {
+                    cout << "No hay sucursales disponibles. Por favor, ingrese una sucursal primero." << endl;
+                    system("pause");
+					break; // Salir del bucle do-while y volver al menú principal
+                }
+				cout << "Ingrese el codigo de la sucursal donde desea registrar el cliente: "; cin >> codigo;
+				sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+                if (!sucursalActual) {
+                    cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+                    system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+                }
+
+				cout << "Ingrese el ID del cliente: "; cin >> id;
+				if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
+					cout << "Error: Ya existe un cliente con esa ID.\n";
+					system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cin.ignore(); // Limpiar el buffer de entrada
+				/*cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
+				cout << "Ingrese el país de residencia del cliente: "; cin >> pais;*/
+				nombre = "Cliente1";
+				pais = "CostaRica";
+
+				
+				cliente = new ClienteNormal(nombre, id, pais);
+				sucursalActual->getContenedorClientes()->ingresarCliente(cliente);
+				cout << "Cliente agregado exitosamente!" << endl;
+				cout << "Desea ingresar otro cliente? (s/n): ";
+				char seguir;
+				cin >> seguir;
+				if (seguir != 's' && seguir != 'S') {
+					break;
+				}
+			} while (true);
+            system("pause");
+			break;
+
+
         case 2:
-            // contenedorSucursales->getSucursalActual()->getContenedorClientes()->agregarClienteJuridico();
+			//Registar Cliente Juridico
+			do {
+				system("cls");
+				if (!contenedorSucursales || contenedorSucursales->estaVacio()) {
+					cout << "No hay sucursales disponibles. Por favor, ingrese una sucursal primero." << endl;
+					system("pause");
+					break; // Salir del bucle do-while y volver al menú principal
+				}
+				cout << "Ingrese el codigo de la sucursal donde desea registrar el cliente: "; cin >> codigo;
+				sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+				if (!sucursalActual) {
+					cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+					system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cout << "Ingrese el ID del cliente: "; cin >> id;
+				if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
+					cout << "Error: Ya existe un cliente con esa ID.\n";
+					system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cin.ignore(); 
+
+				/*cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
+               cout << "Ingrese el país de residencia del cliente: "; cin >> pais;
+               cout << "Ingrese la actividad economica del cliente: "; cin >> actividadEconomica;
+               cliente = new ClienteJuridico(nombre, id, pais, actividadEconomica);*/
+	
+                cliente = new ClienteJuridico("Roberto", id, "Costa Rica", "Panadero");
+				sucursalActual->getContenedorClientes()->ingresarCliente(cliente);
+				cout << "Cliente agregado exitosamente!" << endl;
+				cout << "Desea ingresar otro cliente? (s/n): ";
+				char seguir;
+				cin >> seguir;
+				if (seguir != 's' && seguir != 'S') {
+                    break;
+				}
+			} while (true);
+			system("pause");
+           
+
             break;
         case 3:
-            // contenedorSucursales->getSucursalActual()->getContenedorClientes()->eliminarCliente();
+			// eliminar cliente
+			cout << "Ingrese el codigo de la sucursal donde desea eliminar el cliente: "; cin >> codigo;
+			sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+			if (!sucursalActual) {
+				cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+				system("pause");
+				break; // Salir del bucle do-while y volver al menú principal
+			}
+			cout << "Ingrese el ID del cliente que desea eliminar: "; cin >> id;
+            if (!sucursalActual->getContenedorClientes()->getClienteXId(id)) {
+                cout << "Error: No existe un cliente con esa ID.\n";
+                system("pause");
+            }
+            else {
+                sucursalActual->getContenedorClientes()->eliminarCliente(id);
+                cout << "Cliente eliminado exitosamente!\n";
+                system("pause");
+			}
+
             break;
         case 4:
-            // contenedorSucursales->getSucursalActual()->getContenedorClientes()->mostrarClientes();
+			// mostrar clientes
+			cout << "Ingrese el codigo de la sucursal cuyos clientes desea ver: "; cin >> codigo;
+			sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+			if (!sucursalActual) {
+				cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+				system("pause");
+				break; // Salir del bucle do-while y volver al menú principal
+			}
+			cout << "===== LISTA DE CLIENTES =====\n";
+			cout << sucursalActual->getContenedorClientes()->toString();
+			system("pause");
+
             break;
         case 0: break;
         default: cout << "Opción inválida\n"; system("pause");
         }
     } while (opcion != 0);
+
+
 }
 
 // =====================================================
@@ -164,6 +291,8 @@ void InterfazUsuario::menuClientes() {
 // =====================================================
 void InterfazUsuario::menuColaboradores() {
     int opcion;
+	string nombre, id, codigo, fechaIngreso;
+   
     do {
         system("cls");
         cout << "-------- Gestión de Colaboradores --------\n";
@@ -177,13 +306,111 @@ void InterfazUsuario::menuColaboradores() {
 
         switch (opcion) {
         case 1:
-            // contenedorSucursales->getSucursalActual()->getContenedorColaboradores()->agregarColaborador();
+
+            do
+            {
+				system("cls");
+                if (!contenedorSucursales || contenedorSucursales->estaVacio()) {
+                    cout << "No hay sucursales disponibles. Por favor, ingrese una sucursal primero." << endl;
+                    system("pause");
+                    break; // Salir del bucle do-while y volver al menú principal
+                }
+				cout << "Ingrese el codigo de la sucursal donde desea registrar el colaborador: "; cin >> codigo;
+                Sucursal* sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+                if (!sucursalActual) {
+                    cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+                    system("pause");
+                    continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cout << "Ingrese el nombre del colaborador: "; cin >> nombre;
+				cout << "Ingrese el ID del colaborador: "; cin >> id;
+				cout << "Ingrese la fecha de ingreso del colaborador (DD/MM/AAAA): "; cin >> fechaIngreso;
+
+                if (sucursalActual->getContenedorColaboradores()->buscarColaborador(id)) {
+                    cout << "Error: Ya existe un colaborador con esa ID.\n";
+                    system("pause");
+                    continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				Colaborador* colaborador = new Colaborador(nombre, id, fechaIngreso);
+				sucursalActual->getContenedorColaboradores()->agregarColaborador(colaborador);
+				cout << "Colaborador agregado exitosamente!" << endl;
+				system("pause");
+                cout << "Desea ingresar otro colaborador? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+				}
+
+            } while (true);
             break;
         case 2:
-            // contenedorSucursales->getSucursalActual()->getContenedorColaboradores()->eliminarColaborador();
+			//eliminar colaborador
+            do
+            {
+                system("cls");
+                if (!contenedorSucursales || contenedorSucursales->estaVacio()) {
+                    cout << "No hay sucursales disponibles. Por favor, ingrese una sucursal primero." << endl;
+                    system("pause");
+                    break; // Salir del bucle do-while y volver al menú principal
+				}
+                cout << "Ingrese el codigo de la sucursal donde desea eliminar el colaborador: "; cin >> codigo;
+                Sucursal* sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+                if (!sucursalActual) {
+                    cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+                    system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+                    }
+                cout << "Ingrese el ID del colaborador que desea eliminar: "; cin >> id;
+                if (!sucursalActual->getContenedorColaboradores()->buscarColaborador(id)) {
+                    cout << "Error: No existe un colaborador con esa ID.\n";
+                    system("pause");
+                }
+                else {
+                    sucursalActual->getContenedorColaboradores()->eliminarColaborador(id);
+                    cout << "Colaborador eliminado exitosamente!\n";
+					system("pause");
+
+                    }
+                cout << "Desea eliminar otro colaborador? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+                }
+
+
+            } while (true);
             break;
         case 3:
-            // contenedorSucursales->getSucursalActual()->getContenedorColaboradores()->mostrarColaboradores();
+			// mostrar colaboradores
+            do
+            {
+				system("cls");
+                if (!contenedorSucursales || contenedorSucursales->estaVacio()) {
+                    cout << "No hay sucursales disponibles. Por favor, ingrese una sucursal primero." << endl;
+                    system("pause");
+                    break; // Salir del bucle do-while y volver al menú principal
+                }
+                cout << "Ingrese el codigo de la sucursal cuyos colaboradores desea ver: "; cin >> codigo;
+                Sucursal* sucursalActual = contenedorSucursales->buscarSucursal(codigo);
+                if (!sucursalActual) {
+                    cout << "Sucursal no encontrada. Asegurese de ingresar un codigo valido." << endl;
+                    system("pause");
+                    continue; // Volver al inicio del bucle para intentar de nuevo
+                }
+                cout << "===== LISTA DE COLABORADORES =====\n";
+                cout << sucursalActual->getContenedorColaboradores()->toString();
+                system("pause");
+                cout << "Desea ver los colaboradores de otra sucursal? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+				}
+
+
+            } while (true);
             break;
         case 0: break;
         default: cout << "Opción invalida\n"; system("pause");
