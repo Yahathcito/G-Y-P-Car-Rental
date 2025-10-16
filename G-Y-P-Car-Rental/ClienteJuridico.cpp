@@ -19,11 +19,11 @@ string ClienteJuridico::getTipo(){
 
 string ClienteJuridico::toString() {
     stringstream ss;
-    ss << "==Cliente Jurídico==\n";
+    ss << "==Cliente Juridico==\n";
     ss << "Nombre: " << getNombre() << "\n";
     ss << "ID: " << getId() << "\n";
-    ss << "País Residencia: " << getPaisResidencia() << "\n";
-    ss << "Actividad Económica: " << actividadEconomica << "\n";
+    ss << "Pais Residencia: " << getPaisResidencia() << "\n";
+    ss << "Actividad Economica: " << actividadEconomica << "\n";
     return ss.str();
 }
 

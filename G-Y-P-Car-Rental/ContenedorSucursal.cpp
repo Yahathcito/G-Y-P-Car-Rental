@@ -72,3 +72,8 @@ string ContenedorSucursal::toString(){
 	}
 	return s.str();
 }
+
+Sucursal* ContenedorSucursal::getSucursalActual()
+{
+	return ppio->getSucursal();
+}

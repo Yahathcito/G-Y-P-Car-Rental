@@ -6,11 +6,12 @@ class ContenedorClientes{
 	public:
 		ContenedorClientes(); 
 		virtual ~ContenedorClientes();
-		bool ingresarCliente(Cliente*);
+		void ingresarCliente(Cliente*);
 		string toString();
 		bool estaVacia(); 
 		Cliente* getClienteXId(string);
-
+		bool buscarCliente(string);
+		void eliminarCliente(string);
 
 };
 

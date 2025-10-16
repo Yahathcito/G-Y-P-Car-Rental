@@ -12,18 +12,12 @@ ContenedorClientes::~ContenedorClientes(){
 	}
 }
 
-bool ContenedorClientes::ingresarCliente(Cliente* cli){
-	if (estaVacia()) {
-		ppio = new NodoCliente(cli, ppio); 
-		return true; 
-	}
-	NodoCliente* aux=ppio; 
-	while (aux->getSiguiente() != nullptr) {
-		aux = aux->getSiguiente();
-		if (aux->getCliente()->getId() == cli->getId()) return false;
-	}
-	ppio = new NodoCliente(cli, ppio); 
+void ContenedorClientes::ingresarCliente(Cliente* cli)
+{
+	ppio = new NodoCliente(cli, ppio);
+
 }
+
 
 string ContenedorClientes::toString(){
 	stringstream ss; 
@@ -52,4 +46,30 @@ Cliente* ContenedorClientes::getClienteXId(string id){
 		aux = aux->getSiguiente(); 
 	}
 	return nullptr; 
+}
+
+bool ContenedorClientes::buscarCliente(string)
+{
+	if (estaVacia()) return false; 
+	return true;
+
+}
+
+void ContenedorClientes::eliminarCliente(string id)
+{
+	if (estaVacia()) return; 
+	NodoCliente* actual = ppio; 
+	NodoCliente* anterior = nullptr; 
+	while (actual != nullptr && actual->getCliente()->getId() != id) {
+		anterior = actual; 
+		actual = actual->getSiguiente(); 
+	}
+	if (actual == nullptr) return; 
+	if (anterior == nullptr) {
+		ppio = actual->getSiguiente();
+	}
+	else {
+		anterior->setSiguiente(actual->getSiguiente());
+	}
+	delete actual;
 }
