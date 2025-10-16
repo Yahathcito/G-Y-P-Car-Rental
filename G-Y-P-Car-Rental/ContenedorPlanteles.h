@@ -8,5 +8,7 @@ class ContenedorPlanteles{
 		virtual ~ContenedorPlanteles(); 
 		bool agregarPlantel(Plantel*);
 		bool estaVacio(); 
+		Plantel* buscarPlantel(string);
+		string toString(); 
 };
 

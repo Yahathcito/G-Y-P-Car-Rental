@@ -14,9 +14,10 @@ class Plantel
 		EspacioEstacionamiento*** espacio; 
 public:
 	Plantel(string,int,int);
+	virtual ~Plantel(); 
 		string getId();
 		int getCapacidadMaxima();
-		string* getTipoVehiculo();
+		EspacioEstacionamiento* buscarEspacio(string); 
 		string toString();
 };
 

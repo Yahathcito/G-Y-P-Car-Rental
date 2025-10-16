@@ -20,22 +20,23 @@ bool ContenedorSucursal::agregarSucursal(Sucursal* s){
 
 bool ContenedorSucursal::eliminarSucursal(string codigoUnico){
 	if (estaVacio()) return false;
-	if (ppio->getSucursal()->getNumUnico() == codigoUnico) {
-		NodoSucursal* aux = ppio; 
-		ppio = ppio->getSiguiente(); 
-		delete aux; 
-		return true; 
-	}
-	NodoSucursal* aux = ppio; 
-	while (aux->getSiguiente()!=nullptr && aux->getSiguiente()->getSucursal()->getNumUnico() != codigoUnico) {
-		aux = aux->getSiguiente(); 
-	}
-	if (aux->getSiguiente() == nullptr) return false;
-	NodoSucursal* nodoEliminar = aux->getSiguiente(); 
-	aux->setSiguiente(nodoEliminar->getSiguiente());
-	delete nodoEliminar; 
-	return true; 
 
+	NodoSucursal* actual = ppio; 
+	NodoSucursal* anterior = nullptr; 
+
+	while (actual != nullptr && actual->getSucursal()->getNumUnico() != codigoUnico) {
+		anterior = actual; 
+		actual = actual->getSiguiente(); 
+	}
+	if (actual == nullptr) return false; 
+	if (anterior == nullptr) {
+		ppio = actual->getSiguiente();
+	}
+	else {
+		anterior->setSiguiente(actual->getSiguiente());
+	}
+	delete actual; 
+	return true; 
 }
 
 Sucursal* ContenedorSucursal::buscarSucursal(string codigo){
