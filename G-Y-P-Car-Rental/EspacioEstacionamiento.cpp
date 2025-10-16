@@ -28,6 +28,11 @@ bool EspacioEstacionamiento::estacionarCarro(Carro* carro){
 	return false;
 }
 
+Carro* EspacioEstacionamiento::getCarro()
+{
+	return carroEstacionado;
+}
+
 string EspacioEstacionamiento::toString() {
 	stringstream s;
 	s << "ID del Espacio de Estacionamiento: " << idEspacio << endl;

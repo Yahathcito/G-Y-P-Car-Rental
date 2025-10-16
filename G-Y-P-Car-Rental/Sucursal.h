@@ -20,6 +20,7 @@ private:
 	ContenedorPlanteles* contenedorPlanteles;
 	ContenedorContratoAlquiler* contenedorContratoAlquiler;
 	ContenedorSolicitudAlquiler* contenedorSolicitudAlquiler;
+
 public:
 	Sucursal(string, string);
 	virtual ~Sucursal(); 
