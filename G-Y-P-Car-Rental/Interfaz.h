@@ -2,12 +2,15 @@
 #include <iostream>
 #include <string>
 #include "ContenedorSucursal.h"
+#include "ClienteNormal.h"
+#include"ClienteJuridico.h"
 using namespace std;
 
 class InterfazUsuario {
 private:
     //  Único contenedor global del sistema
     static ContenedorSucursal* contenedorSucursales;
+	
 
 public:
     //  Menú principal

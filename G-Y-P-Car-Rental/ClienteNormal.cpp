@@ -9,7 +9,7 @@ string ClienteNormal::toString() {
     ss << "==Cliente Normal==\n";
     ss << "Nombre: " << getNombre() << "\n";
     ss << "ID: " << getId() << "\n";
-    ss << "País Residencia: " << getPaisResidencia() << "\n";
+    ss << "Pais Residencia: " << getPaisResidencia() << "\n";
     return ss.str();
 }
 
