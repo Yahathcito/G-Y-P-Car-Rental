@@ -1,8 +1,9 @@
 #include <iostream>
-#include <string> 
-using namespace std; 
+#include "Interfaz.h"
+using namespace std;
+
 int main() {
-
-
-	return 0; 
+    InterfazUsuario interfaz;
+    interfaz.menuPrincipal();  
+    return 0;
 }

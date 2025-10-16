@@ -51,9 +51,9 @@ void InterfazUsuario::menuDatosGenerales() {
         cout << "1. Gestionar Sucursales\n";
         cout << "2. Gestionar Clientes\n";
         cout << "3. Gestionar Colaboradores\n";
-        cout << "0. Volver al menú principal\n";
+        cout << "0. Volver al menu principal\n";
         cout << "---------------------------------------------\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -61,7 +61,7 @@ void InterfazUsuario::menuDatosGenerales() {
         case 2: menuClientes(); break;
         case 3: menuColaboradores(); break;
         case 0: break;
-        default: cout << "\nOpción inválida.\n"; system("pause");
+        default: cout << "\nOpción invalida.\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -71,30 +71,54 @@ void InterfazUsuario::menuDatosGenerales() {
 // =====================================================
 void InterfazUsuario::menuSucursales() {
     int opcion;
+    string codigo, provincia;
     do {
         system("cls");
-        cout << "-------- Gestión de Sucursales --------\n";
+        cout << "-------- Gestion de Sucursales --------\n";
         cout << "1. Registrar nueva sucursal\n";
         cout << "2. Eliminar sucursal\n";
         cout << "3. Mostrar todas las sucursales\n";
         cout << "0. Volver\n";
         cout << "---------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
         
         switch (opcion) {
-        case 1:
-           
+        case 1: {
+            cout << "Ingrese el codigo unico de la sucursal: "; cin >> codigo;
+            cout << "Ingrese la provincia de la sucursal: "; cin >> provincia;
+            if (!contenedorSucursales->validarSucursal(codigo)) {
+                cout << "Error: Ya existe una sucursal con ese codigo.\n";
+                system("pause");
+                break;
+            }
+            Sucursal* nuevaSucursal = new Sucursal(codigo, provincia);
+            contenedorSucursales->agregarSucursal(nuevaSucursal);
+            cout << "Sucursal agregada exitosamente!\n"; 
+            system("pause");
+            break;
 
+        }
+        case 2: {
+            cout << "Ingrese el codigo de la sucursal que desea eliminar: "; cin >> codigo; 
+            if (contenedorSucursales->validarSucursal(codigo)) {
+                cout << "Error: No existe una sucursal con este codigo.\n";
+                system("pause");
+                break;
+            }
+            contenedorSucursales->eliminarSucursal(codigo); 
+            cout << "Sucursal eliminada exitosamente!\n";
+            system("pause");
             break;
-        case 2:
-            // contenedorSucursales->eliminarSucursal();
+        }
+        case 3: {
+            cout << "===== LISTA DE SUCURSALES =====\n"; 
+            cout << contenedorSucursales->toString(); 
+            system("pause");
             break;
-        case 3:
-            // contenedorSucursales->mostrarSucursales();
-            break;
+        }
         case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default: cout << "Opción invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }

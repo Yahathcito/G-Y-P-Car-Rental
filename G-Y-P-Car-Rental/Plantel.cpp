@@ -31,7 +31,7 @@ string Plantel::toString() {
 	s << "---------------------------------------\n";
 	for (int i = 0; i < filas;i++) {
 		for (int j = 0; j < filas;j++) {
-			s << "[" << (espacio[i][j]->isDisponible() ? "" : "X") << "]";
+			s << "[" << (espacio[i][j]->isDisponible() ? espacio[i][j]->getIdEspacio() : "X") << "]";
 		}
 		s << endl; 
 	}
