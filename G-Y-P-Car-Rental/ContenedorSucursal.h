@@ -9,6 +9,7 @@ class ContenedorSucursal{
 		bool agregarSucursal(Sucursal*);
 		bool eliminarSucursal(string);
 		Sucursal* buscarSucursal(string);
+		bool validarSucursal(string);
 		bool estaVacio(); 
 		string toString();
 };

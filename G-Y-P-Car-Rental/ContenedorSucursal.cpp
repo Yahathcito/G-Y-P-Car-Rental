@@ -13,18 +13,29 @@ ContenedorSucursal::~ContenedorSucursal(){
 }
 
 bool ContenedorSucursal::agregarSucursal(Sucursal* s){
-	if (estaVacio()) {
-		ppio = new NodoSucursal(s, nullptr);
-		return true;
-	}
-	NodoSucursal* aux = ppio;
-	while (aux != nullptr) {
-		if (aux->getSucursal()->toString() == s->toString()) return false;
-		aux = aux->getSiguiente();
-	}
 	ppio = new NodoSucursal(s, ppio);
 	return true; 
 	
+}
+
+bool ContenedorSucursal::eliminarSucursal(string codigoUnico){
+	if (estaVacio()) return false;
+	if (ppio->getSucursal()->getNumUnico() == codigoUnico) {
+		NodoSucursal* aux = ppio; 
+		ppio = ppio->getSiguiente(); 
+		delete aux; 
+		return true; 
+	}
+	NodoSucursal* aux = ppio; 
+	while (aux->getSiguiente()!=nullptr && aux->getSiguiente()->getSucursal()->getNumUnico() != codigoUnico) {
+		aux = aux->getSiguiente(); 
+	}
+	if (aux->getSiguiente() == nullptr) return false;
+	NodoSucursal* nodoEliminar = aux->getSiguiente(); 
+	aux->setSiguiente(nodoEliminar->getSiguiente());
+	delete nodoEliminar; 
+	return true; 
+
 }
 
 Sucursal* ContenedorSucursal::buscarSucursal(string codigo){
@@ -34,6 +45,17 @@ Sucursal* ContenedorSucursal::buscarSucursal(string codigo){
 		aux = aux->getSiguiente();
 	}
 	return nullptr;
+}
+
+bool ContenedorSucursal::validarSucursal(string codigoUnico){
+	if (estaVacio()) return true; 
+	NodoSucursal* aux = ppio;
+	while (aux != nullptr) {
+		if (aux->getSucursal()->getNumUnico() == codigoUnico) return false;
+		aux = aux->getSiguiente();
+	}
+	return true;
+	
 }
 
 bool ContenedorSucursal::estaVacio(){
