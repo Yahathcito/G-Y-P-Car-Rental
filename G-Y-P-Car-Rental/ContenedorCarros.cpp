@@ -29,6 +29,25 @@ bool ContenedorCarros::agregarCarro(Carro* c) {
 	cabeza = new NodoCarro(c, cabeza);
 	return true;
 }
+bool ContenedorCarros::eliminarCarro(string placa ){ 
+	if (estaVacio()) return false;
+	NodoCarro* actual = cabeza;
+	NodoCarro* anterior = nullptr;
+	while (actual != nullptr && actual->getCarro()->getPlaca() != placa) {
+		anterior = actual; 
+		actual = actual->getSiguiente(); 
+	}
+	if (actual == nullptr) return false; 
+	if (anterior == nullptr) {
+		cabeza->setSiguiente(actual->getSiguiente()); 
+	}
+	else {
+		anterior->setSiguiente(actual->getSiguiente()); 
+	}
+	delete actual; 
+	return true; 
+	
+}
 string ContenedorCarros::toString(){
 	stringstream s; 
 	NodoCarro* aux = cabeza;
@@ -41,5 +60,15 @@ string ContenedorCarros::toString(){
 		aux = aux->getSiguiente();
 	}
 
+	return s.str();
+}
+
+string ContenedorCarros::mostrarTipoDeCarros(){
+	string tipo[4] = { "Economico","Estandar","Lujo","4x4" };
+	stringstream s; 
+	s << "Tipos de carros disponibles:\n";
+	for (int i = 0; i < 4; i++) {
+		s << i + 1 << ". " << tipo[i] << endl;
+	}
 	return s.str();
 }

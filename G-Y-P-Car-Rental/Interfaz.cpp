@@ -51,9 +51,9 @@ void InterfazUsuario::menuDatosGenerales() {
         cout << "1. Gestionar Sucursales\n";
         cout << "2. Gestionar Clientes\n";
         cout << "3. Gestionar Colaboradores\n";
-        cout << "0. Volver al menú principal\n";
+        cout << "0. Volver al menu principal\n";
         cout << "---------------------------------------------\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -61,7 +61,7 @@ void InterfazUsuario::menuDatosGenerales() {
         case 2: menuClientes(); break;
         case 3: menuColaboradores(); break;
         case 0: break;
-        default: cout << "\nOpción inválida.\n"; system("pause");
+        default: cout << "\nOpción invalida.\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -71,30 +71,54 @@ void InterfazUsuario::menuDatosGenerales() {
 // =====================================================
 void InterfazUsuario::menuSucursales() {
     int opcion;
+    string codigo, provincia;
     do {
         system("cls");
-        cout << "-------- Gestión de Sucursales --------\n";
+        cout << "-------- Gestion de Sucursales --------\n";
         cout << "1. Registrar nueva sucursal\n";
         cout << "2. Eliminar sucursal\n";
         cout << "3. Mostrar todas las sucursales\n";
         cout << "0. Volver\n";
         cout << "---------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
         
         switch (opcion) {
-        case 1:
-           
+        case 1: {
+            cout << "Ingrese el codigo unico de la sucursal: "; cin >> codigo;
+            cout << "Ingrese la provincia de la sucursal: "; cin >> provincia;
+            if (!contenedorSucursales->validarSucursal(codigo)) {
+                cout << "Error: Ya existe una sucursal con ese codigo.\n";
+                system("pause");
+                break;
+            }
+            Sucursal* nuevaSucursal = new Sucursal(codigo, provincia);
+            contenedorSucursales->agregarSucursal(nuevaSucursal);
+            cout << "Sucursal agregada exitosamente!\n"; 
+            system("pause");
+            break;
 
+        }
+        case 2: {
+            cout << "Ingrese el codigo de la sucursal que desea eliminar: "; cin >> codigo; 
+            if (contenedorSucursales->validarSucursal(codigo)) {
+                cout << "Error: No existe una sucursal con este codigo.\n";
+                system("pause");
+                break;
+            }
+            contenedorSucursales->eliminarSucursal(codigo); 
+            cout << "Sucursal eliminada exitosamente!\n";
+            system("pause");
             break;
-        case 2:
-            // contenedorSucursales->eliminarSucursal();
+        }
+        case 3: {
+            cout << "===== LISTA DE SUCURSALES =====\n"; 
+            cout << contenedorSucursales->toString(); 
+            system("pause");
             break;
-        case 3:
-            // contenedorSucursales->mostrarSucursales();
-            break;
+        }
         case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default: cout << "Opción invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -162,7 +186,7 @@ void InterfazUsuario::menuColaboradores() {
             // contenedorSucursales->getSucursalActual()->getContenedorColaboradores()->mostrarColaboradores();
             break;
         case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default: cout << "Opción invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -171,7 +195,19 @@ void InterfazUsuario::menuColaboradores() {
 //  PLANTELES Y VEHÍCULOS
 // =====================================================
 void InterfazUsuario::menuPlantelesVehiculos() {
-    int opcion;
+    Plantel* plantel = nullptr; 
+    Carro* carro = nullptr;
+	EspacioEstacionamiento* espacio = nullptr;
+    int opcion,filas,columnas,modelo,tipoOpcion;
+    string codigo,codigoPlantel,placa, marca;
+    string tipo[4] = { "Economico","Estandar","Lujo","4x4" };
+    cout << "Ingrese el codigo de la sucursal en la que desea ingresar: "; cin >> codigo; 
+    Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigo); 
+    if (!sucursal) {
+        cout << "El codigo ingresado no pertenece a ninguna sucursal.\n"; 
+        system("pause"); 
+        return; 
+    }
     do {
         system("cls");
         cout << "=============================================\n";
@@ -189,26 +225,95 @@ void InterfazUsuario::menuPlantelesVehiculos() {
         cin >> opcion;
 
         switch (opcion) {
-        case 1:
-            // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->crearPlantel();
+        case 1: {
+            cout << "Ingrese la letra que va a identificar su plantel: "; cin >> codigoPlantel; 
+            cout << "Ingrese la cantidad de filas que desea en su plantel: "; cin >> filas; 
+            cout << "Ingrese la cantidad de columnas que desea en su plantel: "; cin >> columnas;
+            plantel = new Plantel(codigoPlantel, filas, columnas); 
+            sucursal->getContenedorPlanteles()->agregarPlantel(plantel); 
+            cout << "---Plantel creado exitosamente---" << endl; 
+            system("pause");
             break;
-        case 2:
-            // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->mostrarDistribucion();
+        }
+        case 2: {
+            cout << "PLANTELES DE LA SUCURSAL = " << sucursal->getNumUnico() << " =\n"; 
+            cout << sucursal->getContenedorPlanteles()->toString(); 
+            system("pause");
             break;
-        case 3:
+        }
+        case 3: {
+			/*cout << "Ingrese la placa del vehiculo: "; cin >> placa;
+			cout << "Ingrese el modelo del vehiculo: "; cin >> modelo;
+			cout << "Ingrese la marca del vehiculo: "; cin >> marca;
+			cout << sucursal->getContenedorCarros()->mostrarTipoDeCarros();
+			cout << "Ingrese el tipo de vehiculo (numero): "; cin >> tipoOpcion;
+			if (tipoOpcion < 1 || tipoOpcion > 4) {
+				cout << "Tipo de vehiculo invalido.\n";
+				system("pause");
+				break;
+			}
+			carro = new Carro(placa, modelo, marca, tipo[tipoOpcion - 1]);
+			if (!sucursal->getContenedorCarros()->agregarCarro(carro)) {
+				cout << "Error: Ya existe un vehiculo con esa placa.\n";
+				system("pause");
+				break;
+			}
+			cout << "Vehiculo agregado exitosamente!\n";
+            //ahora vamos a estacionar el vehiculo en un plantel y en un espacio que seleccione el usuario 
+			if (!sucursal->getContenedorPlanteles()->estaVacio()) {
+				cout << "Ingrese el ID del plantel donde desea estacionar el vehículo: "; cin >> codigoPlantel;
+				plantel = sucursal->getContenedorPlanteles()->buscarPlantel(codigoPlantel);
+				if (!plantel) {
+					cout << "Error: No existe un plantel con ese ID.\n";
+					system("pause");
+					break;
+				}
+				cout << plantel->toString();
+				cout << "Ingrese el ID del espacio donde desea estacionar el vehículo: "; cin >> codigoPlantel;
+				espacio = plantel->buscarEspacio(codigo);
+				if (!espacio) {
+					cout << "Error: No existe un espacio con ese ID.\n";
+					system("pause");
+					break;
+				}
+				if (!espacio->estacionarCarro(carro)) {
+					cout << "Error: El espacio no está disponible.\n";
+					system("pause");
+					break;
+				}
+				cout << "Vehículo estacionado exitosamente en el espacio " << espacio->getIdEspacio() << " del plantel " << plantel->getId() << ".\n";
+			}
+			else {
+				cout << "No hay planteles disponibles en esta sucursal. Por favor, cree un plantel primero.\n";
+			}
+
             // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->registrarVehiculo();
+            system("pause");*/
             break;
-        case 4:
-            // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->eliminarVehiculo();
+        }
+        case 4: {
+			cout << "Ingrese la placa del vehículo que desea eliminar: "; cin >> placa;
+			if (!sucursal->getContenedorCarros()->eliminarCarro(placa)) {
+				cout << "Error: No existe un vehículo con esa placa.\n";
+				system("pause");
+				break;
+			}
+			cout << "Vehículo eliminado exitosamente!\n";
+            system("pause");
             break;
-        case 5:
+        }
+        case 5: {
             // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->cambiarEstadoVehiculo();
+            system("pause");
             break;
-        case 6:
+        }
+        case 6: {
             // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->reubicarVehiculo();
+            system("pause");
             break;
+        }
         case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default: cout << "Opción invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }

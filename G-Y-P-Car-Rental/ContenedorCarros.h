@@ -12,5 +12,6 @@ class ContenedorCarros
 		bool eliminarCarro(string);
 		bool estaVacio();	
 		string toString();
+		string mostrarTipoDeCarros();
 };
 
