@@ -16,6 +16,7 @@ public:
 	bool isDisponible();
 	void setDisponible(bool);
 	bool estacionarCarro(Carro*);
+	Carro* getCarro(); 
 	string toString();
 
 };

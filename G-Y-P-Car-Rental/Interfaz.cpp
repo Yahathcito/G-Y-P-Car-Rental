@@ -195,11 +195,11 @@ void InterfazUsuario::menuColaboradores() {
 //  PLANTELES Y VEHÍCULOS
 // =====================================================
 void InterfazUsuario::menuPlantelesVehiculos() {
-    Plantel* plantel = nullptr; 
+    //Plantel* plantel = nullptr; 
     Carro* carro = nullptr;
 	EspacioEstacionamiento* espacio = nullptr;
     int opcion,filas,columnas,modelo,tipoOpcion;
-    string codigo,codigoPlantel,placa, marca;
+    string codigo,codigoPlantel,placa, marca,codigoEspacio;
     string tipo[4] = { "Economico","Estandar","Lujo","4x4" };
     cout << "Ingrese el codigo de la sucursal en la que desea ingresar: "; cin >> codigo; 
     Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigo); 
@@ -229,7 +229,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
             cout << "Ingrese la letra que va a identificar su plantel: "; cin >> codigoPlantel; 
             cout << "Ingrese la cantidad de filas que desea en su plantel: "; cin >> filas; 
             cout << "Ingrese la cantidad de columnas que desea en su plantel: "; cin >> columnas;
-            plantel = new Plantel(codigoPlantel, filas, columnas); 
+            Plantel* plantel = new Plantel(codigoPlantel, filas, columnas); 
             sucursal->getContenedorPlanteles()->agregarPlantel(plantel); 
             cout << "---Plantel creado exitosamente---" << endl; 
             system("pause");
@@ -238,57 +238,48 @@ void InterfazUsuario::menuPlantelesVehiculos() {
         case 2: {
             cout << "PLANTELES DE LA SUCURSAL = " << sucursal->getNumUnico() << " =\n"; 
             cout << sucursal->getContenedorPlanteles()->toString(); 
+            cout << "ingrese el codigo de un plantel: "; cin >> codigoPlantel; 
+            Plantel* plantel = sucursal->getContenedorPlanteles()->buscarPlantel(codigoPlantel); 
+            if (!plantel) break; 
+            cout<<plantel->toString(); 
             system("pause");
             break;
         }
         case 3: {
-			/*cout << "Ingrese la placa del vehiculo: "; cin >> placa;
-			cout << "Ingrese el modelo del vehiculo: "; cin >> modelo;
-			cout << "Ingrese la marca del vehiculo: "; cin >> marca;
-			cout << sucursal->getContenedorCarros()->mostrarTipoDeCarros();
-			cout << "Ingrese el tipo de vehiculo (numero): "; cin >> tipoOpcion;
+            cout << "Ingrese el codigo del plantel para verificar que existe: "; cin >> codigoPlantel; 
+            Plantel* p = sucursal->getContenedorPlanteles()->buscarPlantel(codigoPlantel); 
+            if (!p) {
+                cout << "Plantel no existente en la sucursal." << endl; 
+                break; 
+            }
+			cout << "Ingrese la placa del vehículo: "; cin >> placa;
+			cout << "Ingrese el modelo del vehículo (año): "; cin >> modelo;
+			cout << "Ingrese la marca del vehículo: "; cin >> marca;
+			cout <<sucursal->getContenedorCarros()->mostrarTipoDeCarros();
+			cout << "Seleccione el tipo de vehículo (1-4): "; cin >> tipoOpcion;
 			if (tipoOpcion < 1 || tipoOpcion > 4) {
-				cout << "Tipo de vehiculo invalido.\n";
-				system("pause");
-				break;
+				cout << "Error: Opción de tipo inválida.\n";
+                break; 
 			}
 			carro = new Carro(placa, modelo, marca, tipo[tipoOpcion - 1]);
 			if (!sucursal->getContenedorCarros()->agregarCarro(carro)) {
-				cout << "Error: Ya existe un vehiculo con esa placa.\n";
-				system("pause");
+				cout << "Error: Ya existe un vehículo con esa placa.\n";
 				break;
 			}
-			cout << "Vehiculo agregado exitosamente!\n";
-            //ahora vamos a estacionar el vehiculo en un plantel y en un espacio que seleccione el usuario 
-			if (!sucursal->getContenedorPlanteles()->estaVacio()) {
-				cout << "Ingrese el ID del plantel donde desea estacionar el vehículo: "; cin >> codigoPlantel;
-				plantel = sucursal->getContenedorPlanteles()->buscarPlantel(codigoPlantel);
-				if (!plantel) {
-					cout << "Error: No existe un plantel con ese ID.\n";
-					system("pause");
-					break;
-				}
-				cout << plantel->toString();
-				cout << "Ingrese el ID del espacio donde desea estacionar el vehículo: "; cin >> codigoPlantel;
-				espacio = plantel->buscarEspacio(codigo);
-				if (!espacio) {
-					cout << "Error: No existe un espacio con ese ID.\n";
-					system("pause");
-					break;
-				}
-				if (!espacio->estacionarCarro(carro)) {
-					cout << "Error: El espacio no está disponible.\n";
-					system("pause");
-					break;
-				}
-				cout << "Vehículo estacionado exitosamente en el espacio " << espacio->getIdEspacio() << " del plantel " << plantel->getId() << ".\n";
+            cout << p->toString();
+			cout << "Ingrese el código del espacio donde desea estacionar el vehículo: "; cin >> codigoEspacio;
+			espacio = p->buscarEspacio(codigoEspacio);
+			if (!espacio->isDisponible()) {
+				cout << "Error: El espacio ya está ocupado.\n";
+				sucursal->getContenedorCarros()->eliminarCarro(placa);
+				break;
 			}
-			else {
-				cout << "No hay planteles disponibles en esta sucursal. Por favor, cree un plantel primero.\n";
-			}
-
-            // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->registrarVehiculo();
-            system("pause");*/
+			espacio->estacionarCarro(carro);
+			cout << "Vehículo ingresado y estacionado exitosamente!\n";
+            cout <<espacio->getCarro()->toString(); 
+			cout << p->toString();
+            system("pause");
+            
             break;
         }
         case 4: {
@@ -303,6 +294,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
             break;
         }
         case 5: {
+
             // contenedorSucursales->getSucursalActual()->getContenedorPlanteles()->cambiarEstadoVehiculo();
             system("pause");
             break;

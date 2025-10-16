@@ -33,7 +33,9 @@ bool ContenedorPlanteles::estaVacio(){
 Plantel* ContenedorPlanteles::buscarPlantel(string codigo){
 	NodoPlantel* aux = ppio;
 	while (aux != nullptr) {
-		if (aux->getPlantel()->getId() == codigo) return aux->getPlantel();
+		if (aux->getPlantel()->getId() == codigo) {
+			return aux->getPlantel();
+		}
 		aux = aux->getSiguiente();
 	}
 	return nullptr;
