@@ -8,16 +8,22 @@ using namespace std;
 class Plantel
 {
 	private :
-		string id;
+		char id;
 		int filas; 
 		int columnas;
 		EspacioEstacionamiento*** espacio; 
 public:
-	Plantel(string,int,int);
+	Plantel(char,int,int);
 	virtual ~Plantel(); 
-		string getId();
+		char getId();
 		int getCapacidadMaxima();
 		EspacioEstacionamiento* buscarEspacio(string); 
+		bool eliminarCarro(string); 
+		string mostrarCarrosXPlantel();  
+		Carro* getCarro(string); 
+		bool existenCarros(); 
+		string mostrarEspacioEspecifico(string);
+		string recomendarEspacios(); 
 		string toString();
 };
 

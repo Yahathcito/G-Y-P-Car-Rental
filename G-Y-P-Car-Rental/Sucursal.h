@@ -20,6 +20,7 @@ private:
 	ContenedorPlanteles* contenedorPlanteles;
 	ContenedorContratoAlquiler* contenedorContratoAlquiler;
 	ContenedorSolicitudAlquiler* contenedorSolicitudAlquiler;
+
 public:
 	Sucursal(string, string);
 	virtual ~Sucursal(); 
@@ -30,6 +31,12 @@ public:
 	ContenedorContratoAlquiler* getContenedorContratoAlquiler();
 	ContenedorSolicitudAlquiler* getContenedorSolicitudAlquiler();
 	string getNumUnico();
+	string mostrarVehiculos(); 
+	string mostrarPlantelesDisponibles(); 
+	Plantel* getPlantel(char); 
+	bool validarPlantel(char); 
+	bool NoexistePlantel(); 
+	void intercambiarCarro(Plantel*,string,Carro* ,EspacioEstacionamiento* );
 	string toString();
 };
 

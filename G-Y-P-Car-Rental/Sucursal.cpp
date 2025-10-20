@@ -49,10 +49,44 @@ string Sucursal::getNumUnico()
 	return numUnicoSucursal;
 }
 
+string Sucursal::mostrarVehiculos(){
+	stringstream s; 
+	s << contenedorPlanteles->mostrarCarrosXPlantel(); 
+	return s.str();
+}
+
+string Sucursal::mostrarPlantelesDisponibles(){
+	stringstream s;
+	s << contenedorPlanteles->toString(); 
+	return s.str();
+}
+
+Plantel* Sucursal::getPlantel(char codigo){
+	return contenedorPlanteles->buscarPlantel(codigo);
+}
+
+bool Sucursal::validarPlantel(char id){
+
+	return contenedorPlanteles->validarPlantel(id);
+}
+
+bool Sucursal::NoexistePlantel(){
+	return this->getContenedorPlanteles()->estaVacio(); 
+}
+
+void Sucursal::intercambiarCarro(Plantel* plantelActual, string placa, Carro* carro, EspacioEstacionamiento* espacio){
+	espacio->estacionarCarro(carro); 
+	plantelActual->eliminarCarro(placa);
+	this->getContenedorCarros()->eliminarCarro(placa); 
+}
+
+
 
 string Sucursal::toString() {
 	stringstream s;
+	s << "====================================\n";
 	s << "Numero Unico de Sucursal: " << numUnicoSucursal << endl;
 	s << "Provincia: " << provincia << endl;
+	s << "====================================\n";
 	return s.str();
 }

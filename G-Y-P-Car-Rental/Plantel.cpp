@@ -1,6 +1,6 @@
 #include "Plantel.h"
 
-Plantel::Plantel(string id, int filas,int columnas) {
+Plantel::Plantel(char id, int filas,int columnas) {
 	this->id = id;
 	this->filas = filas; 
 	this->columnas = columnas; 
@@ -11,7 +11,7 @@ Plantel::Plantel(string id, int filas,int columnas) {
 		espacio[i] = new EspacioEstacionamiento * [columnas]; 
 		for (int j = 0; j < columnas;j++) {
 			numero = i * columnas + j; 
-			codigo = id + (numero < 10 ? "0" : "") + to_string(numero); 
+			codigo = string(1,id) + (numero < 10 ? "0" : "") + to_string(numero); 
 			espacio[i][j] = new EspacioEstacionamiento(codigo);
 		}
 	}
@@ -25,7 +25,7 @@ Plantel::~Plantel() {
 		delete[] espacio;
 }
 
-string Plantel::getId() {
+ char Plantel::getId() {
 	return id;
 }
 int Plantel::getCapacidadMaxima() {
@@ -41,6 +41,97 @@ EspacioEstacionamiento* Plantel::buscarEspacio(string codigo){
 	return nullptr;
 }
 
+bool Plantel::eliminarCarro(string placa){
+	for (int i = 0; i < filas;i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (espacio[i][j]->getCarro()!=nullptr && espacio[i][j]->getCarro()->getPlaca()==placa&&espacio[i][j]->getCarro()->getEstado()!="Alquilado") {
+				espacio[i][j]->setCarro(nullptr); 
+				espacio[i][j]->setDisponible(true); 
+				return true; 
+			}
+		}
+	}
+	return false;
+}
+
+string Plantel::mostrarCarrosXPlantel(){
+	stringstream s; 
+	s << "--------------------------\n"; 
+	s << "VEHICULOS DEL PLANTEL ' " << id << " '\n";
+	s << "--------------------------\n";
+	for (int i = 0; i < filas;i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (!espacio[i][j]->isDisponible())
+				s << espacio[i][j]->getCarro()->toString() << endl; 
+		}
+	}
+	return s.str();
+}
+
+
+Carro* Plantel::getCarro(string placa){
+	for (int i = 0; i < filas;i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (espacio[i][j]->getCarro()->getPlaca() == placa) return espacio[i][j]->getCarro(); 
+		}
+	}
+	return nullptr;
+}
+
+bool Plantel::existenCarros(){
+	for (int i = 0; i < filas;i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (espacio[i][j]->getCarro() != nullptr) return true; 
+		}
+	}
+	return false;
+}
+
+string Plantel::mostrarEspacioEspecifico(string codigoEspacio){
+	EspacioEstacionamiento* e = this->buscarEspacio(codigoEspacio);
+	Carro* carro = e->getCarro(); 
+	if (carro) {
+		return "Este espacio posee al carro placa: " + this->buscarEspacio(codigoEspacio)->getCarro()->getPlaca();
+	}
+	return "Este espacio no posee un carro.\n"; 
+}
+
+string Plantel::recomendarEspacios(){
+	int MAXrecomendados = 3; 
+	int contadorRecomendados = 0; 
+	stringstream s;
+	s << "Espacios recomendados: "; 
+	for (int i = 0; i < filas; i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (espacio[i][j]->isDisponible()) {
+				bool vecinosDisponibles = true; 
+				if (i - 1 >= 0) {
+					if (!espacio[i - 1][j]->isDisponible())
+						vecinosDisponibles = false; 
+				}
+				if (i + 1 < filas) {
+					if (!espacio[i + 1][j]->isDisponible())
+						vecinosDisponibles = false;
+				}
+				if (j-1 >= 0) {
+					if (!espacio[i][j-1]->isDisponible())
+						vecinosDisponibles = false;
+				}
+				if (j + 1 < filas) {
+					if (!espacio[i][j+1]->isDisponible())
+						vecinosDisponibles = false;
+				}
+				if (vecinosDisponibles) {
+					s << espacio[i][j]->getIdEspacio() << ", "; 
+					contadorRecomendados++; 
+				}
+				if (contadorRecomendados == MAXrecomendados) return s.str(); 
+			}
+		}
+	}
+	return s.str(); 
+}
+
 string Plantel::toString() {
 	stringstream s;
 	s << "---------------------------------------\n";
@@ -49,7 +140,7 @@ string Plantel::toString() {
 	s << "---------------------------------------\n";
 	for (int i = 0; i < filas;i++) {
 		for (int j = 0; j < columnas;j++) {
-			s << "[" << (espacio[i][j]->isDisponible() ? espacio[i][j]->getIdEspacio() : "X") << "]";
+			s << "[" << (espacio[i][j]->isDisponible() ? espacio[i][j]->getIdEspacio() : " X ") << "]";
 		}
 		s << endl; 
 	}

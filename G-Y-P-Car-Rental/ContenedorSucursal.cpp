@@ -48,6 +48,28 @@ Sucursal* ContenedorSucursal::buscarSucursal(string codigo){
 	return nullptr;
 }
 
+bool ContenedorSucursal::haySucursalesSuficientes(){
+	int contadorSucursales = 0; 
+	NodoSucursal* aux = ppio; 
+	while (aux != nullptr) {
+		contadorSucursales++; 
+		if (contadorSucursales > 0) return true; 
+	}
+	return false;
+}
+
+string ContenedorSucursal::mostrarSucursalesExceptoActual(string sucActual){
+	stringstream s; 
+	NodoSucursal* aux=ppio; 
+	while (aux != nullptr) {
+		if (aux->getSucursal()->getNumUnico() != sucActual) {
+			s << aux->getSucursal()->toString(); 
+		}
+		aux = aux->getSiguiente(); 
+	}
+	return s.str();
+}
+
 bool ContenedorSucursal::validarSucursal(string codigoUnico){
 	if (estaVacio()) return true; 
 	NodoSucursal* aux = ppio;

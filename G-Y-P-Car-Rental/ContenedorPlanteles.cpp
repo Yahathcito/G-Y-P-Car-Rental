@@ -13,10 +13,6 @@ ContenedorPlanteles::~ContenedorPlanteles(){
 }
 
 bool ContenedorPlanteles::agregarPlantel(Plantel* p){
-	if (estaVacio()) {
-		ppio = new NodoPlantel(p, ppio); 
-		return true; 
-	}
 	NodoPlantel* aux=ppio; 
 	while (aux != nullptr) {
 		if (aux->getPlantel()->getId() == p->getId()) return false; 
@@ -27,16 +23,36 @@ bool ContenedorPlanteles::agregarPlantel(Plantel* p){
 }
 
 bool ContenedorPlanteles::estaVacio(){
-	return ppio = nullptr;
+	return ppio == nullptr;
 }
 
-Plantel* ContenedorPlanteles::buscarPlantel(string codigo){
+Plantel* ContenedorPlanteles::buscarPlantel(char codigo){
 	NodoPlantel* aux = ppio;
 	while (aux != nullptr) {
-		if (aux->getPlantel()->getId() == codigo) return aux->getPlantel();
+		if (aux->getPlantel()->getId() == codigo) {
+			return aux->getPlantel();
+		}
 		aux = aux->getSiguiente();
 	}
 	return nullptr;
+}
+
+string ContenedorPlanteles::mostrarCarrosXPlantel() {
+	stringstream s;
+	NodoPlantel* aux = ppio; 
+	while (aux != nullptr) {
+		s << aux->getPlantel()->mostrarCarrosXPlantel(); 
+		aux = aux->getSiguiente(); 
+	}
+	return s.str();
+}
+
+bool ContenedorPlanteles::validarPlantel(char id){
+	NodoPlantel* aux = ppio; 
+	while (aux != nullptr) {
+		if (aux->getPlantel()->getId() == id) return true; 
+	}
+	return false;
 }
 
 string ContenedorPlanteles::toString(){

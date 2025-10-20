@@ -1,27 +1,29 @@
 #include "Carro.h"
 
-Carro::Carro(string placa, int modelo, string marca, string tipo) {
+Carro::Carro(string placa, int modelo, string marca, string categoria,string tipoLicencia) {
     this->placa = placa;
     this->modelo = modelo;
     this->marca = marca;
-    this->tipo = tipo;
+    this->categoria = categoria;
+    this->tipoLicencia = tipoLicencia; 
+    this->estado = "Disponible";
 }
 
-void Carro::setPlaca(string p) {
-    placa = p;
-}
+void Carro::setPlaca(string p) { placa = p; }
 
-void Carro::setModelo(int m) {
-    modelo = m;
-}
+void Carro::setModelo(int m) {modelo = m;}
 
 void Carro::setMarca(string m) {
     marca = m;
 }
 
-void Carro::setTipo(string t) {
-    tipo = t;
+void Carro::setCategoria(string c) {
+    categoria = c; 
 }
+
+void Carro::setEstado(string e) { estado = e; }
+
+void Carro::setTipoLicencia(string t) { tipoLicencia = t; }
 
 string Carro::getPlaca() {
     return placa;
@@ -35,8 +37,15 @@ string Carro::getMarca() {
     return marca;
 }
 
-string Carro::getTipo() {
-    return tipo;
+string Carro::getCategoria() {
+    return categoria;
+}
+string Carro::getEstado(){
+    return estado;
+}
+
+string Carro::getTipoLicencia(){
+    return tipoLicencia;
 }
 
 string Carro::toString() {
@@ -44,6 +53,9 @@ string Carro::toString() {
     s << "Placa: " << placa << endl;
     s << "Modelo: " << modelo << endl;
     s << "Marca: " << marca << endl;
-    s << "Tipo: " << tipo << endl;
+    s << "Categoria: " << categoria << endl;
+    s << "Tipo de licencia requerida: " << tipoLicencia << endl; 
+    s << "Estado actual: " << estado << endl; 
     return s.str();
 }
+

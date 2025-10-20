@@ -6,7 +6,6 @@ EspacioEstacionamiento::EspacioEstacionamiento(string idEspacio) {
 	this->carroEstacionado = nullptr;
 }
 EspacioEstacionamiento::~EspacioEstacionamiento(){
-	if (disponible) return;
 	carroEstacionado = nullptr;
 }
 string EspacioEstacionamiento::getIdEspacio() {
@@ -26,6 +25,16 @@ bool EspacioEstacionamiento::estacionarCarro(Carro* carro){
 		return true;
 	}
 	return false;
+}
+
+
+Carro* EspacioEstacionamiento::getCarro()
+{
+	return carroEstacionado;
+}
+
+void EspacioEstacionamiento::setCarro(Carro* c){
+	this->carroEstacionado = c; 
 }
 
 string EspacioEstacionamiento::toString() {
