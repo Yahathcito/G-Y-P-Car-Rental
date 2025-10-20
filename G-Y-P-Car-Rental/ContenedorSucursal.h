@@ -9,6 +9,8 @@ class ContenedorSucursal{
 		bool agregarSucursal(Sucursal*);
 		bool eliminarSucursal(string);
 		Sucursal* buscarSucursal(string);
+		bool haySucursalesSuficientes(); 
+		string mostrarSucursalesExceptoActual(string); 
 		bool validarSucursal(string);
 		bool estaVacio(); 
 		string toString();

@@ -4,7 +4,6 @@
 ContenedorCarros::ContenedorCarros():cabeza(nullptr){}
 
 ContenedorCarros::~ContenedorCarros(){
-	if (estaVacio()) return;
 	NodoCarro* actual;
 	while (cabeza != nullptr) {
 		actual = cabeza;
@@ -15,6 +14,18 @@ ContenedorCarros::~ContenedorCarros(){
 bool ContenedorCarros::estaVacio() {
 	return cabeza == nullptr;
 }
+
+Carro* ContenedorCarros::obtenerCarro(string placa){
+	if (estaVacio())return nullptr; 
+	NodoCarro* aux = cabeza; 
+	while (aux != nullptr) {
+		if (aux->getCarro()->getPlaca() == placa)
+			return aux->getCarro(); 
+	}
+
+	return nullptr;
+}
+
 
 bool ContenedorCarros::agregarCarro(Carro* c) {
 	if (estaVacio()) {
@@ -31,13 +42,14 @@ bool ContenedorCarros::agregarCarro(Carro* c) {
 }
 bool ContenedorCarros::eliminarCarro(string placa ){ 
 	if (estaVacio()) return false;
+
 	NodoCarro* actual = cabeza;
 	NodoCarro* anterior = nullptr;
 	while (actual != nullptr && actual->getCarro()->getPlaca() != placa) {
 		anterior = actual; 
 		actual = actual->getSiguiente(); 
 	}
-	if (actual == nullptr) return false; 
+	if (actual == nullptr || actual->getCarro()->getEstado() == "Alquilado") return false;
 	if (anterior == nullptr) {
 		cabeza->setSiguiente(actual->getSiguiente()); 
 	}
@@ -59,7 +71,7 @@ string ContenedorCarros::toString(){
 		s << aux->getCarro()->toString() << "\n";
 		aux = aux->getSiguiente();
 	}
-
+	
 	return s.str();
 }
 
@@ -72,3 +84,4 @@ string ContenedorCarros::mostrarTipoDeCarros(){
 	}
 	return s.str();
 }
+
