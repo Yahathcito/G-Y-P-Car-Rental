@@ -8,7 +8,7 @@ class NodoCarro
 		NodoCarro* siguiente;
 public:
 	NodoCarro(Carro*,NodoCarro*);
-	~NodoCarro();
+	virtual ~NodoCarro();
 	Carro* getCarro();
 	Carro* setCarro(Carro*);
 	NodoCarro* getSiguiente();

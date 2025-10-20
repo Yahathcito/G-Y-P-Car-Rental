@@ -7,17 +7,23 @@ private:
 	string placa;
 	int modelo;
 	string marca;
-	string tipo;
+	string categoria;
+	string tipoLicencia; 
+	string estado; 
 public:
-	Carro(string,int,string,string);
+	Carro(string,int,string,string,string);
 	void setPlaca(string);
 	void setModelo(int);
 	void setMarca(string);
-	void setTipo(string);
+	void setCategoria(string);
+	void setEstado(string); 
+	void setTipoLicencia(string); 
 	string getPlaca();
 	int getModelo();
 	string getMarca();
-	string getTipo();
+	string getCategoria();
 	string toString();
+	string getEstado(); 
+	string getTipoLicencia(); 
 };
 

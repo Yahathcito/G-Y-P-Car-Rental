@@ -7,11 +7,12 @@ class ContenedorCarros
 		
 	public: 
 		ContenedorCarros();
-		~ContenedorCarros();
+		virtual ~ContenedorCarros();
 		bool agregarCarro(Carro*);
 		bool eliminarCarro(string);
-		bool estaVacio();	
-		string toString();
+		bool estaVacio();
+		Carro* obtenerCarro(string); 
 		string mostrarTipoDeCarros();
+		string toString();
 };
 
