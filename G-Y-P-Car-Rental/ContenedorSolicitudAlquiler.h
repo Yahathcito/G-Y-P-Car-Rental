@@ -8,7 +8,10 @@ class ContenedorSolicitudAlquiler
 	public:
 		ContenedorSolicitudAlquiler();
 		~ContenedorSolicitudAlquiler();
+		void agregarSolicitudAlquiler(SolicitudAlquiler* nuevaSolicitud);
 		bool estaVacio();
+		bool buscarSolicitudPorId(string idSolicitud);
+		string toString();
 
 };
 

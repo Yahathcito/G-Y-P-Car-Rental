@@ -693,40 +693,179 @@ void InterfazUsuario::menuPlantelesVehiculos() {
 //  SOLICITUDES Y CONTRATOS
 // =====================================================
 void InterfazUsuario::menuSolicitudesContratos() {
+    // PASO 0: Selección de sucursal donde operar
+    string idCliente, idColaborador, placa, fechaInicio, fechaEntrega, idSolicitud;
+    int dias = 0;
+    float precioDiario = 0.0f;
+
+
+
+    string codigoSucursal;
+
+
+
+    
+
+    // Contadores simples de IDs (persisten entre invocaciones del menú)
+    int seqSolicitud = 1;
+    int seqContrato = 1;
+
     int opcion;
     do {
         system("cls");
         cout << "=============================================\n";
         cout << "       MÓDULO: SOLICITUDES Y CONTRATOS\n";
         cout << "=============================================\n";
-        cout << "1. Crear solicitud de alquiler\n";
-        cout << "2. Mostrar solicitudes\n";
-        cout << "3. Aprobar o rechazar solicitud\n";
-        cout << "4. Crear contrato (desde solicitud aprobada)\n";
-        cout << "5. Finalizar contrato (devolución de vehículo)\n";
+        cout << "1. Crear solicitud de alquiler  [\n";
+        cout << "2. Mostrar solicitudes          \n";
+        cout << "3. Aprobar o rechazar solicitud [pendiente contenedor]\n";
+        cout << "4. Crear contrato (desde solicitud aprobada) [pendiente contenedor]\n";
+        cout << "5. Finalizar contrato (devolución de vehículo) [pendiente contenedor]\n";
         cout << "0. Volver\n";
         cout << "---------------------------------------------\n";
         cout << "Opción: ";
         cin >> opcion;
 
         switch (opcion) {
-        case 1:
-            // contenedorSucursales->getSucursalActual()->getContenedorSolicitudes()->crearSolicitud();
+        case 1: {
+            do
+            {
+                system("cls");
+                cout << "Ingrese el codigo de la sucursal en la que desea operar: ";
+                cin >> codigoSucursal;
+                Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+                if (!sucursal) {
+                    cout << "Error: Sucursal no encontrada.\n";
+                    system("pause");
+                    return;
+				}
+    //            cout << "Ingrese el ID del cliente que realiza la solicitud: ";
+    //            cin >> idCliente;
+    //            cout << "Ingrese el ID del colaborador que atiende la solicitud: ";
+    //            cin >> idColaborador;
+    //            cout << "Ingrese la placa del vehículo a alquilar: ";
+    //            cin >> placa;
+    //            cout << "Ingrese la fecha de inicio del alquiler (DD/MM/AAAA): ";
+    //            cin >> fechaInicio;
+    //            cout << "Ingrese la fecha de entrega del vehículo (DD/MM/AAAA): ";
+    //            cin >> fechaEntrega;
+    //            cout << "Ingrese el precio diario del alquiler: ";
+    //            cin >> precioDiario;
+				//cout << "Ingrese la cantidad de días del alquiler: ";
+				//cin >> dias;
+				//cout << "Ingrese un nuevo id de Solicitud\n";
+				//cin >> idSolicitud;
+
+				//cout << "-------------------------------------\n";
+
+
+				//// Validaciones básicas
+    //            
+				//Cliente* cliente = sucursal->getContenedorClientes()->getClienteXId(idCliente);
+    //            if (!cliente) {
+    //                cout << "Error: Cliente no encontrado.\n";
+    //                system("pause");
+    //                continue;
+				//}
+				//Colaborador* colaborador = sucursal->getContenedorColaboradores()->buscarColaborador(idColaborador);
+    //            if (!colaborador) {
+    //                cout << "Error: Colaborador no encontrado.\n";
+    //                system("pause");
+				//	continue;
+
+				//}
+				//Carro* carro = sucursal->getContenedorCarros()->obtenerCarro(placa);
+    //            if (!carro) {
+    //                cout << "Error: Vehículo no encontrado.\n";
+				//	system("pause");
+				//	continue;
+				//}
+				//// buscar que no exista una solicitud igual pendiente
+    //           if (sucursal->getContenedorSolicitudAlquiler()->buscarSolicitudPorId(idSolicitud)) {
+    //               cout << "Error: Ya existe una solicitud con ese ID.\n";
+    //               system("pause");
+    //               continue;
+    //           }
+               string esta[4] = {"pendiente", "", "", ""};
+			 //  // Crear objeto SolicitudAlquiler
+
+			 //  SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler(idSolicitud, idCliente, idColaborador,dias,fechaInicio,fechaEntrega, precioDiario, esta);
+
+				// datos de prueba
+
+				SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler("SOL123", "CL001", "COL001", 5, "01/07/2024", "06/07/2024", 50.0f, esta);
+
+                // Crear y agregar solicitud
+
+                sucursal->getContenedorSolicitudAlquiler()->agregarSolicitudAlquiler(nuevaSolicitud);
+                cout << "Solicitud de alquiler creada exitosamente!\n";
+                cout << nuevaSolicitud->toString() << endl;
+                cout << "Desea crear otra solicitud? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+                }
+
+
+            } while (true);
+        }
+        case 2: {
+            // PASO 2 (siguiente): Mostrar solicitudes desde el contenedor
+            //genera codigo 
+
+            do
+            {
+				system("cls");
+
+                cout << "Ingrese el codigo de la sucursal en la que desea operar: ";
+                cin >> codigoSucursal;
+                Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+                if (!sucursal) {
+                    cout << "Error: Sucursal no encontrada.\n";
+                    system("pause");
+                    return;
+                }
+				// ya esta hecho
+               
+               
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+				}
+
+            } while (true);
+            system("pause");
             break;
-        case 2:
-            // contenedorSucursales->getSucursalActual()->getContenedorSolicitudes()->mostrarSolicitudes();
+        }
+        case 3: {
+            // PASO 3 (siguiente): Aprobar/Rechazar solicitud
+            cout << "Pendiente: requiere ContenedorSolicitudAlquiler::buscarPorId() y cambio de estado.\n";
+            cout << "Sugerido: usar estados 'pendiente'/'aprobada'/'rechazada'/'anulada' en SolicitudAlquiler.\n";
+            system("pause");
             break;
-        case 3:
-            // contenedorSucursales->getSucursalActual()->getContenedorSolicitudes()->aprobarRechazarSolicitud();
+        }
+        case 4: {
+            // PASO 4 (siguiente): Crear contrato desde solicitud aprobada
+            cout << "Pendiente: requiere ContenedorSolicitudAlquiler::buscarPorId() y ContenedorContratoAlquiler::agregar().\n";
+            cout << "Ademas, marcar el vehiculo como 'Alquilado' y eliminar la solicitud aprobada.\n";
+            system("pause");
             break;
-        case 4:
-            // contenedorSucursales->getSucursalActual()->getContenedorContratos()->crearContrato();
+        }
+        case 5: {
+            // PASO 5 (siguiente): Finalizar contrato (devolución)
+            cout << "Pendiente: requiere buscar contrato activo por placa y actualizar total con multa/reintegro.\n";
+            cout << "- Anticipada: reintegro 70% por dia no usado.\n";
+            cout << "- Tardia: multa 130% por dia de atraso.\n";
+            cout << "Al final, marcar el vehiculo como 'Disponible'.\n";
+            system("pause");
             break;
-        case 5:
-            // contenedorSucursales->getSucursalActual()->getContenedorContratos()->finalizarContrato();
+        }
+        case 0:
             break;
-        case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default:
+            cout << "Opción inválida\n"; system("pause");
         }
     } while (opcion != 0);
 }

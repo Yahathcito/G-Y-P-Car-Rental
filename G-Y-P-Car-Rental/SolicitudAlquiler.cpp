@@ -2,6 +2,7 @@
 
 SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, string idColaborador, int canDiasAlquiler, string fechaInicioAlquiler, string fechaFinAlquiler, float precioAlquiler, string estadoSolicitud[])
 {
+
 	this->idSolicitud = idSolicitud;
 	this->idCliente = idCliente;
 	this->idColaborador = idColaborador;

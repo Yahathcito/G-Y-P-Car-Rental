@@ -8,5 +8,10 @@ public:
 		ContenedorContratoAlquiler();
 		~ContenedorContratoAlquiler();
 		bool estaVacio();
+		bool buscarContratoAlquiler(string idContrato);
+		void eliminarContratoAlquiler(string idContrato);
+		void agregarContratoAlquiler(ContratoAlquiler* nuevoContrato);
+		string toString();
+
 };
 
