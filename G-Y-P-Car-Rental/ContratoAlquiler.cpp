@@ -1,10 +1,26 @@
 #include "ContratoAlquiler.h"
 
 
-ContratoAlquiler::ContratoAlquiler(string, string, string, string, string, string, int, float, float, string[])
+ContratoAlquiler::ContratoAlquiler()
+{
+	this->idContrato = "";
+	this->idSolicitud = "";
+	this->idCliente = "";
+	this->idColaborador = "";
+	this->placaVehiculo = "";
+	this->fechaInicio = "";
+	this->fechaEntrega = "";
+	this->dias = 0;
+	this->precioDiario = 0.0;
+	this->precioTotal = 0.0;
+	for (int i = 0; i < 3; i++) {
+		this->estadoContrato[i] = "";
+	}
+}
+
+ContratoAlquiler::ContratoAlquiler(string idContrato, string idCliente, string idColaborador, string placaVehiculo, string fechaInicio, string fechaEntrega, int dias, float precioDiario, float precioTotal, string estadoContrato[])
 {
 	this->idContrato = idContrato;
-	this->idSolicitud = idSolicitud;
 	this->idCliente = idCliente;
 	this->idColaborador = idColaborador;
 	this->placaVehiculo = placaVehiculo;
@@ -17,6 +33,7 @@ ContratoAlquiler::ContratoAlquiler(string, string, string, string, string, strin
 		this->estadoContrato[i] = estadoContrato[i];
 	}
 }
+
 
 string ContratoAlquiler::getIdContrato()
 {

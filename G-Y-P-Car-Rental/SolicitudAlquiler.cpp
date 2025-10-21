@@ -1,15 +1,16 @@
 #include "SolicitudAlquiler.h"
 
-SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, string idColaborador, int canDiasAlquiler, string fechaInicioAlquiler, string fechaFinAlquiler, float precioAlquiler, string estadoSolicitud[])
-{
 
+SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, string idColaborador, string placaVehiculo, int canDiasAlquiler, string fechaInicioAlquiler, string fechaFinAlquiler, float precioAlquiler, float precioDias, string estadoSolicitud[]) {
 	this->idSolicitud = idSolicitud;
 	this->idCliente = idCliente;
 	this->idColaborador = idColaborador;
+	this->placaVehiculo = placaVehiculo;
 	this->canDiasAlquiler = canDiasAlquiler;
 	this->fechaInicioAlquiler = fechaInicioAlquiler;
 	this->fechaFinAlquiler = fechaFinAlquiler;
 	this->precioAlquiler = precioAlquiler;
+	this->precioDias = precioDias;
 	for (int i = 0; i < 4; i++) {
 		this->estadoSolicitud[i] = estadoSolicitud[i];
 	}
@@ -42,10 +43,19 @@ float SolicitudAlquiler::getPrecioAlquiler()
 {
 	return precioAlquiler;
 }
+float SolicitudAlquiler::getPrecioDias()
+{
+	return precioDias;
+}
+string SolicitudAlquiler::getPlacaVehiculo()
+{
+	return placaVehiculo;
+}
 string* SolicitudAlquiler::getEstadoSolicitud()
 {
 	return estadoSolicitud;
 }
+
 string SolicitudAlquiler::toString()
 {
 	stringstream s;
@@ -65,4 +75,10 @@ string SolicitudAlquiler::toString()
 	}
 	s << endl;
 	return s.str();
+}
+void SolicitudAlquiler::setEstadoSolicitud(int indice, string nuevoEstado)
+{
+	if (indice >= 0 && indice < 4) {
+		estadoSolicitud[indice] = nuevoEstado;
+	}
 }

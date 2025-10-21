@@ -19,6 +19,25 @@ void ContenedorSolicitudAlquiler::agregarSolicitudAlquiler(SolicitudAlquiler* nu
 	cabeza = nuevoNodo;
 
 }
+void ContenedorSolicitudAlquiler::eliminarSolicitud(string idSolicitud)
+{
+	NodoSolicitudAlquiler* actual = cabeza;
+	NodoSolicitudAlquiler* anterior = nullptr;
+	while (actual != nullptr) {
+		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
+			if (anterior == nullptr) {
+				cabeza = actual->getSiguiente();
+			}
+			else {
+				anterior->setSiguiente(actual->getSiguiente());
+			}
+			delete actual;
+			return;
+		}
+		anterior = actual;
+		actual = actual->getSiguiente();
+	}
+}
 bool ContenedorSolicitudAlquiler::estaVacio()
 {
 	return cabeza == nullptr;
@@ -34,6 +53,41 @@ bool ContenedorSolicitudAlquiler::buscarSolicitudPorId(string idSolicitud)
 		actual = actual->getSiguiente();
 	}
 	return false;
+}
+
+SolicitudAlquiler* ContenedorSolicitudAlquiler::obtenerSolicitudPorId(string idSolicitud)
+{
+	NodoSolicitudAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
+			return actual->getSolicitudAlquiler();
+		}
+		actual = actual->getSiguiente();
+	}
+	return nullptr;
+}
+
+void ContenedorSolicitudAlquiler::aprobarSolicitud(string idSolicitud)
+{
+	NodoSolicitudAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
+			actual->getSolicitudAlquiler()->setEstadoSolicitud(0, "aprobada");
+			return;
+		}
+		actual = actual->getSiguiente();
+	}
+}
+void ContenedorSolicitudAlquiler::rechazarSolicitud(string idSolicitud)
+{
+	NodoSolicitudAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
+			actual->getSolicitudAlquiler()->setEstadoSolicitud(0, "rechazada");
+			return;
+		}
+		actual = actual->getSiguiente();
+	}
 }
 
 string ContenedorSolicitudAlquiler::toString()

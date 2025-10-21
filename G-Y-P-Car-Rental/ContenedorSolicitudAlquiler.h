@@ -9,8 +9,12 @@ class ContenedorSolicitudAlquiler
 		ContenedorSolicitudAlquiler();
 		~ContenedorSolicitudAlquiler();
 		void agregarSolicitudAlquiler(SolicitudAlquiler* nuevaSolicitud);
+		void eliminarSolicitud(string idSolicitud);
 		bool estaVacio();
 		bool buscarSolicitudPorId(string idSolicitud);
+		SolicitudAlquiler* obtenerSolicitudPorId(string idSolicitud);
+		void aprobarSolicitud(string idSolicitud);
+		void rechazarSolicitud(string idSolicitud);
 		string toString();
 
 };
