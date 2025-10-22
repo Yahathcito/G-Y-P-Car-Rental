@@ -15,8 +15,17 @@ ContenedorSolicitudAlquiler::~ContenedorSolicitudAlquiler()
 }
 void ContenedorSolicitudAlquiler::agregarSolicitudAlquiler(SolicitudAlquiler* nuevaSolicitud)
 {
-	NodoSolicitudAlquiler* nuevoNodo = new NodoSolicitudAlquiler(nuevaSolicitud, cabeza);
-	cabeza = nuevoNodo;
+	NodoSolicitudAlquiler* nuevoNodo = new NodoSolicitudAlquiler(nuevaSolicitud, nullptr);
+	if (estaVacio()) {
+		cabeza = nuevoNodo;
+	}
+	else {
+		NodoSolicitudAlquiler* actual = cabeza;
+		while (actual->getSiguiente() != nullptr) {
+			actual = actual->getSiguiente();
+		}
+		actual->setSiguiente(nuevoNodo);
+	}
 
 }
 void ContenedorSolicitudAlquiler::eliminarSolicitud(string idSolicitud)
@@ -72,7 +81,7 @@ void ContenedorSolicitudAlquiler::aprobarSolicitud(string idSolicitud)
 	NodoSolicitudAlquiler* actual = cabeza;
 	while (actual != nullptr) {
 		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
-			actual->getSolicitudAlquiler()->setEstadoSolicitud(0, "aprobada");
+			actual->getSolicitudAlquiler()->setEstadoSolicitud( "aprobada");
 			return;
 		}
 		actual = actual->getSiguiente();
@@ -83,7 +92,7 @@ void ContenedorSolicitudAlquiler::rechazarSolicitud(string idSolicitud)
 	NodoSolicitudAlquiler* actual = cabeza;
 	while (actual != nullptr) {
 		if (actual->getSolicitudAlquiler()->getIdSolicitud() == idSolicitud) {
-			actual->getSolicitudAlquiler()->setEstadoSolicitud(0, "rechazada");
+			actual->getSolicitudAlquiler()->setEstadoSolicitud( "rechazada");
 			return;
 		}
 		actual = actual->getSiguiente();

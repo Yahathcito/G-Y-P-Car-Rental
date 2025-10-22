@@ -1,7 +1,7 @@
 #include "SolicitudAlquiler.h"
 
 
-SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, string idColaborador, string placaVehiculo, int canDiasAlquiler, string fechaInicioAlquiler, string fechaFinAlquiler, float precioAlquiler, float precioDias, string estadoSolicitud[]) {
+SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, string idColaborador, string placaVehiculo, int canDiasAlquiler, string fechaInicioAlquiler, string fechaFinAlquiler, float precioAlquiler, float precioDias, string estadoSolicitud) {
 	this->idSolicitud = idSolicitud;
 	this->idCliente = idCliente;
 	this->idColaborador = idColaborador;
@@ -11,9 +11,7 @@ SolicitudAlquiler::SolicitudAlquiler(string idSolicitud, string idCliente, strin
 	this->fechaFinAlquiler = fechaFinAlquiler;
 	this->precioAlquiler = precioAlquiler;
 	this->precioDias = precioDias;
-	for (int i = 0; i < 4; i++) {
-		this->estadoSolicitud[i] = estadoSolicitud[i];
-	}
+	this->estadoSolicitud = estadoSolicitud;
 }
 string SolicitudAlquiler::getIdSolicitud()
 {
@@ -51,7 +49,7 @@ string SolicitudAlquiler::getPlacaVehiculo()
 {
 	return placaVehiculo;
 }
-string* SolicitudAlquiler::getEstadoSolicitud()
+string SolicitudAlquiler::getEstadoSolicitud()
 {
 	return estadoSolicitud;
 }
@@ -69,17 +67,11 @@ string SolicitudAlquiler::toString()
 	s << "Fecha Fin Alquiler: " << fechaFinAlquiler << "\n";
 	s << "Precio Alquiler: " << precioAlquiler << "\n";
 	s << "Precio Dias: " << precioDias << "\n";
-	s << "Estado Solicitud: ";
-	for (int i = 0; i < 4; i++) {
-		s << estadoSolicitud[i];
-		if (i < 3) s << ", ";
-	}
-	s << "\n";
+	s << "Estado Solicitud: " << estadoSolicitud << "\n";
 	return s.str();
 }
-void SolicitudAlquiler::setEstadoSolicitud(int indice, string nuevoEstado)
+
+void SolicitudAlquiler::setEstadoSolicitud( string nuevoEstado)
 {
-	if (indice >= 0 && indice < 4) {
-		estadoSolicitud[indice] = nuevoEstado;
-	}
+	estadoSolicitud = nuevoEstado;
 }

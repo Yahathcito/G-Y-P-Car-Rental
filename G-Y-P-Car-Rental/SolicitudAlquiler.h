@@ -15,10 +15,10 @@ class SolicitudAlquiler
 	string fechaFinAlquiler;
 	float precioAlquiler;
 	float precioDias;
-	string estadoSolicitud[4];
+	string estadoSolicitud;
 public:
 
-	SolicitudAlquiler(string, string, string, string, int, string, string, float, float, string[]);
+	SolicitudAlquiler(string, string, string, string, int, string, string, float, float, string);
 
 	string getIdSolicitud();
 	string getIdCliente();
@@ -30,9 +30,9 @@ public:
 	float getPrecioDias();
 	string getPlacaVehiculo();
 
-	string* getEstadoSolicitud();
+	string getEstadoSolicitud();
 	string toString();
-	void setEstadoSolicitud(int, string);
+	void setEstadoSolicitud(string);
 
 
 
