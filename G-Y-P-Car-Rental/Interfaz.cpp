@@ -805,7 +805,7 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     break;
                 }
             } while (true);
-            break; // evitar fall-through hacia el case 2
+            break;
         }
         case 2: {
             do {
@@ -943,9 +943,7 @@ void InterfazUsuario::menuSolicitudesContratos() {
         }
         case 5: {
 			system("cls");
-			
-            //aca va la parte de volver a colocar el carro en el plantel y cambiar su estado a disponible
-
+			//aca se va a finalizar el contrato, ver que tipo de devolucion debe hacerse y luego se va a colocar el carro en disponible
             system("pause");
             break;
         }
@@ -979,10 +977,60 @@ void InterfazUsuario::menuReportesClientes() {
 
         switch (opcion) {
         case 1:
-            // contenedorSucursales->getSucursalActual()->reporteHistorialCliente();
+            
+            do
+            {
+				system("cls");
+                cout << "Ingrese el codigo de la sucursal en la que desea operar: ";
+                string codigoSucursal;
+                cin >> codigoSucursal;
+                Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+                if (!sucursal) {
+                    cout << "Error: Sucursal no encontrada.\n";
+                    system("pause");
+                    continue; // volver a intentar dentro del ciclo interno
+				}
+				cout << "===== HISTORIAL DE CLIENTE =====\n";
+				string idCliente;
+                cout << "Ingrese el ID del cliente: "; cin >> idCliente;
+                Cliente* cliente = sucursal->getContenedorClientes()->getClienteXId(idCliente);
+                if (!cliente) {
+                    cout << "Error: No existe un cliente con esa ID.\n";
+                    system("pause");
+					continue; // volver a intentar dentro del ciclo interno
+                    }
+                cout << "----- SOLICITUDES DE ALQUILER -----\n";
+                sucursal->getContenedorSolicitudAlquiler()->mostrarSolicitudesPorCliente(idCliente);
+                cout << "----- CONTRATOS DE ALQUILER -----\n";
+                sucursal->getContenedorContratoAlquiler()->mostrarContratosPorCliente(idCliente);
+                system("pause");
+
+                cout << "Desea ver el historial de otro cliente? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+
+                }
+
+            } while (true);
             break;
         case 2:
-            // contenedorSucursales->getSucursalActual()->reporteClientesPorContratos();
+
+            do
+            {
+				system("cls");
+                //pendiente
+
+                system("pause");
+                cout << "Desea ver el reporte de otra sucursal? (s/n): ";
+                char seguir;
+                cin >> seguir;
+                if (seguir != 's' && seguir != 'S') {
+                    break;
+                }
+
+            } while (true);
             break;
         case 0: break;
         default: cout << "Opción inválida\n"; system("pause");

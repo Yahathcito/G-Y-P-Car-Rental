@@ -99,6 +99,17 @@ void ContenedorSolicitudAlquiler::rechazarSolicitud(string idSolicitud)
 	}
 }
 
+void ContenedorSolicitudAlquiler::mostrarSolicitudesPorCliente(string idCliente)
+{
+	NodoSolicitudAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getSolicitudAlquiler()->getIdCliente() == idCliente) {
+			cout << actual->getSolicitudAlquiler()->toString() << "\n";
+		}
+		actual = actual->getSiguiente();
+	}
+}
+
 string ContenedorSolicitudAlquiler::toString()
 {
 	stringstream s;

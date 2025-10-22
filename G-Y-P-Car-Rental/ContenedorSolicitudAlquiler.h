@@ -15,6 +15,7 @@ class ContenedorSolicitudAlquiler
 		SolicitudAlquiler* obtenerSolicitudPorId(string idSolicitud);
 		void aprobarSolicitud(string idSolicitud);
 		void rechazarSolicitud(string idSolicitud);
+		void mostrarSolicitudesPorCliente(string idCliente);
 		string toString();
 
 };
