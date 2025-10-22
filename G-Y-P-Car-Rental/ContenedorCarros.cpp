@@ -15,6 +15,18 @@ bool ContenedorCarros::estaVacio() {
 	return cabeza == nullptr;
 }
 
+bool ContenedorCarros::buscarCarro(string placa)
+{
+	if (estaVacio()) return false; 
+	NodoCarro* aux = cabeza; 
+	while (aux != nullptr) {
+		if (aux->getCarro()->getPlaca() == placa)
+			return true; 
+		aux = aux->getSiguiente(); 
+	}
+	return false;
+}
+
 Carro* ContenedorCarros::obtenerCarro(string placa){
 	if (estaVacio())return nullptr; 
 	NodoCarro* aux = cabeza; 

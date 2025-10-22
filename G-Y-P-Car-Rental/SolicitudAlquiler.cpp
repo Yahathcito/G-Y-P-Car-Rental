@@ -56,24 +56,25 @@ string* SolicitudAlquiler::getEstadoSolicitud()
 	return estadoSolicitud;
 }
 
+
 string SolicitudAlquiler::toString()
 {
 	stringstream s;
-	s << "ID: " << idSolicitud << endl;
-	s << "ID Cliente: " << idCliente << endl;
-	s << "ID Colaborador: " << idColaborador << endl;
-	s << "Cantidad Dias Alquiler: " << canDiasAlquiler << endl;
-	s << "Fecha Inicio Alquiler: " << fechaInicioAlquiler << endl;
-	s << "Fecha Fin Alquiler: " << fechaFinAlquiler << endl;
-	s << "Precio Alquiler: " << precioAlquiler << endl;
+	s << "ID Solicitud: " << idSolicitud << "\n";
+	s << "ID Cliente: " << idCliente << "\n";
+	s << "ID Colaborador: " << idColaborador << "\n";
+	s << "Placa Vehiculo: " << placaVehiculo << "\n";
+	s << "Cantidad Dias Alquiler: " << canDiasAlquiler << "\n";
+	s << "Fecha Inicio Alquiler: " << fechaInicioAlquiler << "\n";
+	s << "Fecha Fin Alquiler: " << fechaFinAlquiler << "\n";
+	s << "Precio Alquiler: " << precioAlquiler << "\n";
+	s << "Precio Dias: " << precioDias << "\n";
 	s << "Estado Solicitud: ";
 	for (int i = 0; i < 4; i++) {
 		s << estadoSolicitud[i];
-		if (i < 3) {
-			s << ", ";
-		}
+		if (i < 3) s << ", ";
 	}
-	s << endl;
+	s << "\n";
 	return s.str();
 }
 void SolicitudAlquiler::setEstadoSolicitud(int indice, string nuevoEstado)
