@@ -12,6 +12,7 @@ class ContenedorCarros
 		bool eliminarCarro(string);
 		bool estaVacio();
 		bool buscarCarro(string);
+		Carro* buscarCarroPorPlaca(string);
 		Carro* obtenerCarro(string); 
 		string mostrarTipoDeCarros();
 		string toString();

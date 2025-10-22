@@ -102,3 +102,5 @@ string ContratoAlquiler::toString()
 	s << endl;
 	return s.str();
 }
+
+

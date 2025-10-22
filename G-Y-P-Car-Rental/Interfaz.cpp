@@ -750,12 +750,19 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     continue; // volver a intentar dentro del ciclo interno
 				}
 				cout << "Ingrese la placa del vehículo a alquilar: "; cin >> placa;
-				//comprobar si el vehiculo existe
-                if (!sucursal->getContenedorCarros()->buscarCarro(placa)) {
+				//comprobar si el vehiculo existe y compruebe que el carro esta disponible
+
+                Carro* carroAlquiler = sucursal->getContenedorCarros()->buscarCarroPorPlaca(placa);
+                if (!carroAlquiler) {
                     cout << "Error: No existe un vehículo con esa placa.\n";
                     system("pause");
                     continue; // volver a intentar dentro del ciclo interno
                 }
+                if (!carroAlquiler->verificarDisponibilidad()) {
+                    cout << "Error: El vehículo no está disponible para alquiler.\n";
+                    system("pause");
+                    continue; // volver a intentar dentro del ciclo interno
+				}
 				cout << "Ingrese la fecha de inicio del alquiler (DD/MM/AAAA): "; cin >> fechaInicio;
 				cout << "Ingrese la fecha de entrega del vehículo (DD/MM/AAAA): "; cin >> fechaEntrega;
 				cout << "Ingrese la cantidad de días de alquiler: "; cin >> dias;
@@ -809,11 +816,7 @@ void InterfazUsuario::menuSolicitudesContratos() {
             break;
         }
         case 3: {
-
-
-
-            // PASO 3 (siguiente): Aprobar/Rechazar solicitud
-            system("cls");
+             system("cls");
             cout << "Digite el codigo de la sucursal en la que desea operar: ";
             cin >> codigoSucursal;
              sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
@@ -853,7 +856,6 @@ void InterfazUsuario::menuSolicitudesContratos() {
             break;
         }
         case 4: {
-            // PASO 4 (siguiente): Crear contrato desde solicitud aprobada
             system("cls");
             cout << "Digite el codigo de la sucursal en la que desea operar: ";
             cin >> codigoSucursal;
@@ -886,22 +888,19 @@ void InterfazUsuario::menuSolicitudesContratos() {
 			}
 
 			string estadoContrato[5] = { "Aprobado en alquiler","Aprobado pendiente de ejecucion","Finalizado con multa","Finalizado con reintegro","Finalizado sin cargos adicionales" };
-
-
-			// debe ingresarse un nuevo estado de contarto al crearse, el case 5 lo unico que muestre es en base a lo que se llene en este "estado"Cuando una solicitud de alquiler es aprobada, dicha solicitud se convierte en un
-            /*contrato de alquiler y deja de ser una solicitud de alquiler.Los posibles estados
-                del contrato son los siguientes :
-            − Aprobado en alquiler.
-                − Aprobado pendiente de ejecución.
-                − Finalizado(finalizado con multa, finalizado con reintegro, finalizado sin
-                    cargos adicionales) (**)
-                (**) Al ser devuelto un vehículo se da por finalizado el contrato, pero antes se debe
-                verificar que se haya devuelto a tiempo.Al devolver un vehículo se ingresa la placa
-                del vehículo y la cantidad de días que se utilizó.En caso que se entregue de manera
-                anticipada, se debe hacer un reintegro del 70 % sobre el precio diario del alquiler
-                por cada día que no se utilizó el vehículo.En caso que la entrega sea tardía, se
-                debe cobrar una multa del 130 % sobre el precio diario del alquiler, por cada día de
-                atraso.*/
+			cout << "Seleccione el estado del contrato:\n";
+            for (int i = 0; i < 5; i++) {
+                cout << i + 1 << ". " << estadoContrato[i] << endl;
+			}
+            int estadoSeleccionado;
+            cout << "Ingrese el numero correspondiente al estado del contrato: ";
+            cin >> estadoSeleccionado;
+            if (estadoSeleccionado < 1 || estadoSeleccionado > 5) {
+                cout << "Error: Opcion de estado invalida.\n";
+                system("pause");
+                break;
+			}
+			string* estado = &estadoContrato[estadoSeleccionado - 1];
 
 
 
@@ -911,7 +910,7 @@ void InterfazUsuario::menuSolicitudesContratos() {
                 solicitud->getCanDiasAlquiler(),
                 solicitud->getPrecioDias(),
                 solicitud->getPrecioAlquiler(),
-                solicitud->getEstadoSolicitud() 
+			estado
             );
 
             sucursal->getContenedorContratoAlquiler()->agregarContratoAlquiler(nuevoContrato);
@@ -920,16 +919,35 @@ void InterfazUsuario::menuSolicitudesContratos() {
             // Eliminar solicitud del contenedor
             sucursal->getContenedorSolicitudAlquiler()->eliminarSolicitud(idSolicitud);
             cout << "Solicitud eliminada del contenedor.\n";
+			// aca se debe cambiar el estado del carro a no disponible
 
             system("pause");
             break;
         }
         case 5: {
-            // PASO 5 (siguiente): Finalizar contrato (devolución)
-            cout << "Pendiente: requiere buscar contrato activo por placa y actualizar total con multa/reintegro.\n";
-            cout << "- Anticipada: reintegro 70% por dia no usado.\n";
-            cout << "- Tardia: multa 130% por dia de atraso.\n";
-            cout << "Al final, marcar el vehiculo como 'Disponible'.\n";
+			system("cls");
+			cout << "Digite el codigo de la sucursal en la que desea operar: ";
+			cin >> codigoSucursal;
+			sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+            if (!sucursal) {
+                cout << "Error: Sucursal no encontrada.\n";
+            }
+			cout << "Digite el ID del contrato a finalizar: ";
+			cin >> idSolicitud;
+			if (!sucursal->getContenedorContratoAlquiler()->buscarContratoAlquiler(idSolicitud)) {
+                cout << "Error: Contrato no encontrado.\n";
+                system("pause");
+				break;
+            }
+            else
+            {
+
+
+                sucursal->getContenedorContratoAlquiler()->finalizarContrato(idSolicitud);
+                cout << "Contrato finalizado exitosamente!\n";
+            }
+            //aca va la parte de volver a colocar el carro en el plantel y cambiar su estado a disponible
+
             system("pause");
             break;
         }

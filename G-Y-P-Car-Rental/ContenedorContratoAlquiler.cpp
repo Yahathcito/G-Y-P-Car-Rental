@@ -54,6 +54,18 @@ void ContenedorContratoAlquiler::agregarContratoAlquiler(ContratoAlquiler* nuevo
 	NodoContratoAlquiler* nuevoNodo = new NodoContratoAlquiler(nuevoContrato, cabeza);
 	cabeza = nuevoNodo;
 }
+void ContenedorContratoAlquiler::finalizarContrato(string idContrato)
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getContratoAlquiler()->getIdContrato() == idContrato) {
+			string* estado = actual->getContratoAlquiler()->getEstadoContrato();
+			estado[0] = "Finalizado sin cargos adicionales";
+			return;
+		}
+		actual = actual->getSiguiente();
+	}
+}
 string ContenedorContratoAlquiler::toString()
 {
 	stringstream s;

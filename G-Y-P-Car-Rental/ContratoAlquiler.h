@@ -35,5 +35,6 @@ public:
 		float getPrecioTotal();
 		string* getEstadoContrato();
 		string toString();
+
 };
 

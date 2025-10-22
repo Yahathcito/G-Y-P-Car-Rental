@@ -59,3 +59,11 @@ string Carro::toString() {
     return s.str();
 }
 
+
+bool Carro::verificarDisponibilidad() {
+    if( estado == "Disponible")
+        return true;
+    else
+		return false;
+}
+

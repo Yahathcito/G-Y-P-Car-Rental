@@ -25,5 +25,6 @@ public:
 	string toString();
 	string getEstado(); 
 	string getTipoLicencia(); 
+	bool verificarDisponibilidad();
 };
 

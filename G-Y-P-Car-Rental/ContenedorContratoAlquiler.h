@@ -11,6 +11,7 @@ public:
 		bool buscarContratoAlquiler(string idContrato);
 		void eliminarContratoAlquiler(string idContrato);
 		void agregarContratoAlquiler(ContratoAlquiler* nuevoContrato);
+		void finalizarContrato(string idContrato);
 		string toString();
 
 };
