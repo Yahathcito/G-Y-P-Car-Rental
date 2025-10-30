@@ -31,6 +31,18 @@ bool ContenedorContratoAlquiler::buscarContratoAlquiler(string idContrato)
 	return false;
 }
 
+ContratoAlquiler* ContenedorContratoAlquiler::obtenerContratoAlquiler(string idContrato)
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getContratoAlquiler()->getIdContrato() == idContrato) {
+			return actual->getContratoAlquiler();
+		}
+		actual = actual->getSiguiente();
+	}
+	return nullptr;
+}
+
 void ContenedorContratoAlquiler::eliminarContratoAlquiler(string idContrato)
 {
 	if (estaVacio()) return;
@@ -54,13 +66,13 @@ void ContenedorContratoAlquiler::agregarContratoAlquiler(ContratoAlquiler* nuevo
 	NodoContratoAlquiler* nuevoNodo = new NodoContratoAlquiler(nuevoContrato, cabeza);
 	cabeza = nuevoNodo;
 }
+
 void ContenedorContratoAlquiler::finalizarContrato(string idContrato)
 {
 	NodoContratoAlquiler* actual = cabeza;
 	while (actual != nullptr) {
 		if (actual->getContratoAlquiler()->getIdContrato() == idContrato) {
-			string* estado = actual->getContratoAlquiler()->getEstadoContrato();
-			estado[0] = "Finalizado sin cargos adicionales";
+			actual->getContratoAlquiler()->setEstadoContrato("Finalizado");
 			return;
 		}
 		actual = actual->getSiguiente();

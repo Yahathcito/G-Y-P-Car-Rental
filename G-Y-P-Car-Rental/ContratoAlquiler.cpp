@@ -13,12 +13,10 @@ ContratoAlquiler::ContratoAlquiler()
 	this->dias = 0;
 	this->precioDiario = 0.0;
 	this->precioTotal = 0.0;
-	for (int i = 0; i < 3; i++) {
-		this->estadoContrato[i] = "";
-	}
+	this->estadoContrato = "";
 }
 
-ContratoAlquiler::ContratoAlquiler(string idContrato, string idCliente, string idColaborador, string placaVehiculo, string fechaInicio, string fechaEntrega, int dias, float precioDiario, float precioTotal, string estadoContrato[])
+ContratoAlquiler::ContratoAlquiler(string idContrato, string idCliente, string idColaborador, string placaVehiculo, string fechaInicio, string fechaEntrega, int dias, float precioDiario, float precioTotal, string estadoContrato)
 {
 	this->idContrato = idContrato;
 	this->idCliente = idCliente;
@@ -29,11 +27,8 @@ ContratoAlquiler::ContratoAlquiler(string idContrato, string idCliente, string i
 	this->dias = dias;
 	this->precioDiario = precioDiario;
 	this->precioTotal = precioTotal;
-	for (int i = 0; i < 3; i++) {
-		this->estadoContrato[i] = estadoContrato[i];
-	}
+	this->estadoContrato = estadoContrato;
 }
-
 
 string ContratoAlquiler::getIdContrato()
 {
@@ -63,6 +58,10 @@ string ContratoAlquiler::getFechaEntrega()
 {
 	return fechaEntrega;
 }
+void ContratoAlquiler::setEstadoContrato(string estadoContrato)
+{
+	this->estadoContrato = estadoContrato;
+}
 int ContratoAlquiler::getDias()
 {
 	return dias;
@@ -75,31 +74,29 @@ float ContratoAlquiler::getPrecioTotal()
 {
 	return precioTotal;
 }
-string* ContratoAlquiler::getEstadoContrato()
+
+string ContratoAlquiler::getEstadoContrato()
 {
 	return estadoContrato;
 }
+
+
+
+
+
 string ContratoAlquiler::toString()
 {
 	stringstream s;
-	s << "ID Contrato: " << idContrato << endl;
-	s << "ID Solicitud: " << idSolicitud << endl;
-	s << "ID Cliente: " << idCliente << endl;
-	s << "ID Colaborador: " << idColaborador << endl;
-	s << "Placa Vehiculo: " << placaVehiculo << endl;
-	s << "Fecha Inicio: " << fechaInicio << endl;
-	s << "Fecha Entrega: " << fechaEntrega << endl;
-	s << "Dias: " << dias << endl;
-	s << "Precio Diario: " << precioDiario << endl;
-	s << "Precio Total: " << precioTotal << endl;
-	s << "Estado Contrato: ";
-	for (int i = 0; i < 3; i++) {
-		s << estadoContrato[i];
-		if (i < 2) {
-			s << ", ";
-		}
-	}
-	s << endl;
+	s << "ID Contrato: " << idContrato << "\n";
+	s << "ID Cliente: " << idCliente << "\n";
+	s << "ID Colaborador: " << idColaborador << "\n";
+	s << "Placa Vehiculo: " << placaVehiculo << "\n";
+	s << "Fecha Inicio: " << fechaInicio << "\n";
+	s << "Fecha Entrega: " << fechaEntrega << "\n";
+	s << "Dias: " << dias << "\n";
+	s << "Precio Diario: " << precioDiario << "\n";
+	s << "Precio Total: " << precioTotal << "\n";
+	s << "Estado Contrato: " << estadoContrato << "\n";
 	return s.str();
 }
 
