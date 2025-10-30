@@ -231,8 +231,7 @@ void InterfazUsuario::menuClientes() {
                cout << "Ingrese la actividad economica del cliente: "; cin >> actividadEconomica;
                cliente = new ClienteJuridico(nombre, id, pais, actividadEconomica);*/
 	
-				id = "2";
-                cliente = new ClienteJuridico("Roberto", id, "Costa Rica", "Panadero");
+                cliente = new ClienteJuridico("Roberto", "1", "Costa Rica", "Panadero");
 				sucursalActual->getContenedorClientes()->ingresarCliente(cliente);
 				cout << "Cliente agregado exitosamente!" << endl;
 				cout << "Desea ingresar otro cliente? (s/n): ";
@@ -769,16 +768,16 @@ void InterfazUsuario::menuSolicitudesContratos() {
     int opcion;
     do {
         system("cls");
-        cout << "       MÓDULO: SOLICITUDES Y CONTRATOS\n";
+        cout << "       MODULO: SOLICITUDES Y CONTRATOS\n";
         cout << "=============================================\n";
         cout << "1. Crear solicitud de alquiler\n";
         cout << "2. Mostrar solicitudes\n";
         cout << "3. Aprobar o rechazar solicitud\n";
         cout << "4. Crear contrato (desde solicitud aprobada)\n";
-        cout << "5. Finalizar contrato (devolución de vehículo)\n";
+        cout << "5. Finalizar contrato (devolucion de vehiculo)\n";
         cout << "0. Volver\n";
         cout << "---------------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -794,7 +793,21 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     continue; // volver a intentar dentro del ciclo interno
                 }
 				cout << "===== CREAR SOLICITUD DE ALQUILER EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << "===== LISTA DE SOLICITUDES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+                cout << sucursal->getContenedorSolicitudAlquiler()->toString();
+               
 				cout << "Ingrese el ID de la solicitud: "; cin >> idSolicitud;
+                //la de clientes 
+                if (sucursal->getContenedorSolicitudAlquiler()->buscarSolicitudPorId(idSolicitud)) {
+                    cout << "Error: Ya existe una solicitud con esa ID.\n";
+                    system("pause");
+					continue; // volver a intentar dentro del ciclo interno
+				}
+				// muestra los clientes disponibles en la sucursal
+				cout << "===== LISTA DE CLIENTES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << sucursal->getContenedorClientes()->toString();
+
+
 				cout << "Ingrese el ID del cliente: "; cin >> idCliente;
 				//comprobar si el cliente existe
                 if (!sucursal->getContenedorClientes()->getClienteXId(idCliente)) {
@@ -802,6 +815,10 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     system("pause");
                     continue; // volver a intentar dentro del ciclo interno
 				}
+				// muestra los colaboradores disponibles en la sucursal
+				cout << "===== LISTA DE COLABORADORES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << sucursal->getContenedorColaboradores()->toString();
+
 				cout << "Ingrese el ID del colaborador que atiende la solicitud: "; cin >> idColaborador;
                 //comprobar si el colaborador existe
                 if (!sucursal->getContenedorColaboradores()->buscarColaborador(idColaborador)) {
@@ -816,12 +833,12 @@ void InterfazUsuario::menuSolicitudesContratos() {
                 if (!carroAlquiler) {
                     cout << "Error: No existe un vehiculo con esa placa.\n";
                     system("pause");
-                    continue; // volver a intentar dentro del ciclo interno
+                    continue; 
                 }
                 if (!carroAlquiler->verificarDisponibilidad()) {
                     cout << "Error: El vehiculo no está disponible para alquiler.\n";
                     system("pause");
-                    continue; // volver a intentar dentro del ciclo interno
+                    continue;
 				}
 				cout << "Ingrese la fecha de inicio del alquiler (DD/MM/AAAA): "; cin >> fechaInicio;
 				cout << "Ingrese la fecha de entrega del vehiculo (DD/MM/AAAA): "; cin >> fechaEntrega;
@@ -834,13 +851,13 @@ void InterfazUsuario::menuSolicitudesContratos() {
 				string estado = "Pendiente";
 
 
-
+				system("cls");
                 // Solicitud usando los valores ya declarados
 				SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler(idSolicitud, idCliente, idColaborador, placa, dias, fechaInicio, fechaEntrega, precioTotal, precioDias, estado);
                 sucursal->getContenedorSolicitudAlquiler()->agregarSolicitudAlquiler(nuevaSolicitud);
                 cout << "Solicitud de alquiler creada exitosamente!\n";
                 cout << nuevaSolicitud->toString() << endl;
-
+				system("pause");
                 cout << "Desea crear otra solicitud? (s/n): ";
                 char seguir;
                 cin >> seguir;
@@ -927,31 +944,34 @@ void InterfazUsuario::menuSolicitudesContratos() {
                 break;
             }
 
+            if (!sucursal->getContenedorSolicitudAlquiler()) {
+                cout << "Error: El contenedor de solicitudes no existe.\n";
+                system("pause");
+                break;
+            }
+
             cout << "Digite el ID de la solicitud aprobada para crear el contrato: ";
             cin >> idSolicitud;
 
-            if (!sucursal->getContenedorSolicitudAlquiler()->obtenerSolicitudPorId(idSolicitud)) {
+            SolicitudAlquiler* solicitud = sucursal->getContenedorSolicitudAlquiler()->obtenerSolicitudPorId(idSolicitud);
+            if (!solicitud) {
                 cout << "Error: Solicitud no encontrada.\n";
                 system("pause");
                 break;
             }
 
-			
-
-
-
-            SolicitudAlquiler* solicitud = sucursal->getContenedorSolicitudAlquiler()->obtenerSolicitudPorId(idSolicitud);
-            if ((solicitud->getEstadoSolicitud()) != "aprobada") {
+            if (solicitud->getEstadoSolicitud() != "aprobada") {
                 cout << "Error: La solicitud no ha sido aprobada.\n";
                 system("pause");
                 break;
-			}
+            }
 
-			string estadoContrato[2] = { "Aprobado en alquiler","Aprobado pendiente de ejecucion" };
-			cout << "Seleccione el estado del contrato:\n";
+            string estadoContrato[2] = { "Aprobado en alquiler", "Aprobado pendiente de ejecucion" };
+            cout << "Seleccione el estado del contrato:\n";
             for (int i = 0; i < 2; i++) {
                 cout << i + 1 << ". " << estadoContrato[i] << endl;
-			}
+            }
+
             int estadoSeleccionado;
             cout << "Ingrese el numero correspondiente al estado del contrato: ";
             cin >> estadoSeleccionado;
@@ -959,34 +979,90 @@ void InterfazUsuario::menuSolicitudesContratos() {
                 cout << "Error: Opcion de estado invalida.\n";
                 system("pause");
                 break;
-			}
-			string* estado = &estadoContrato[estadoSeleccionado - 1];
+            }
 
+            string estadoSeleccionadoStr = estadoContrato[estadoSeleccionado - 1];
 
-
-            ContratoAlquiler* nuevoContrato = new ContratoAlquiler(solicitud->getIdSolicitud(),solicitud->getIdCliente(),solicitud->getIdColaborador(),solicitud->getPlacaVehiculo(),
+            ContratoAlquiler* nuevoContrato = new ContratoAlquiler(
+                solicitud->getIdSolicitud(),
+                solicitud->getIdCliente(),
+                solicitud->getIdColaborador(),
+                solicitud->getPlacaVehiculo(),
                 solicitud->getFechaInicioAlquiler(),
                 solicitud->getFechaFinAlquiler(),
                 solicitud->getCanDiasAlquiler(),
                 solicitud->getPrecioDias(),
                 solicitud->getPrecioAlquiler(),
-			estado
+                estadoSeleccionadoStr
             );
-
+            if(!nuevoContrato) {
+                cout << "Error: No se pudo crear el contrato.\n";
+                system("pause");
+                break;
+			}
             sucursal->getContenedorContratoAlquiler()->agregarContratoAlquiler(nuevoContrato);
             cout << "Contrato creado exitosamente desde la solicitud aprobada!\n";
 
-            // Eliminar solicitud del contenedor
+            Carro* carroAlquilado = sucursal->getContenedorCarros()->buscarCarroPorPlaca(solicitud->getPlacaVehiculo());
+            if (carroAlquilado) {
+                carroAlquilado->cambiarEstado(carroAlquilado->getEstado(), "Alquilado", solicitud->getIdColaborador(), solicitud->getFechaInicioAlquiler());
+            }
+            else {
+                cout << "Error: No se encontro el vehiculo para cambiar su estado a 'Alquilado'.\n";
+            }
+
             sucursal->getContenedorSolicitudAlquiler()->eliminarSolicitud(idSolicitud);
             cout << "Solicitud eliminada del contenedor.\n";
-			// aca se debe cambiar el estado del carro a no disponible
 
             system("pause");
             break;
         }
+
         case 5: {
 			system("cls");
-			//aca se va a finalizar el contrato, ver que tipo de devolucion debe hacerse y luego se va a colocar el carro en disponible
+			//aca se va a finalizar el contrato, ver que tipo de devolucion debe hacerse y luego se va a colocar el carro en devueto // realizado //
+
+
+			cout << "Digite el codigo de la sucursal en la que desea operar: ";
+			cin >> codigoSucursal;
+			sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+            if (!sucursal) {
+                cout << "Error: Sucursal no encontrada.\n";
+            }
+			cout << "Digite el ID del contrato a finalizar: ";
+			cin >> idSolicitud;
+            if (!sucursal->getContenedorContratoAlquiler()->buscarContratoAlquiler(idSolicitud)) {
+                cout << "Error: Contrato no encontrado.\n";
+            }
+           
+			cout << "Ingrese la cantidad de dias que se utilizo el vehiculo: "; int diasUtilizados; cin >> diasUtilizados;
+			ContratoAlquiler* contratoFinalizar = sucursal->getContenedorContratoAlquiler()->obtenerContratoAlquiler(idSolicitud);
+
+            if (diasUtilizados < contratoFinalizar->getDias()) {
+                int diasNoUtilizados = contratoFinalizar->getDias() - diasUtilizados;
+                float reintegro = diasNoUtilizados * contratoFinalizar->getPrecioDiario() * 0.7f;
+                cout << "El contrato se finaliza de manera anticipada. Reintegro por dias no utilizados: $" << reintegro << endl;
+            }
+            else if (diasUtilizados > contratoFinalizar->getDias()) {
+                int diasAtraso = diasUtilizados - contratoFinalizar->getDias();
+                float multa = diasAtraso * contratoFinalizar->getPrecioDiario() * 1.3f;
+                cout << "El contrato se finaliza con atraso. Multa por dias de atraso: $" << multa << endl;
+            }
+            else {
+                cout << "El contrato se finaliza sin cargos adicionales." << endl;
+            }
+			// Cambiar estado del carro a "Devuelto"
+			Carro* carroDevuelto = sucursal->getContenedorCarros()->buscarCarroPorPlaca(contratoFinalizar->getPlacaVehiculo());
+
+            if (carroDevuelto) {
+                carroDevuelto->cambiarEstado(carroDevuelto->getEstado(), "Devuelto", contratoFinalizar->getIdColaborador(), contratoFinalizar->getFechaEntrega());
+            } else {
+                cout << "Error: No se encontró el vehículo para cambiar su estado a 'Devuelto'.\n";
+            }
+
+            sucursal->getContenedorContratoAlquiler()->eliminarContratoAlquiler(idSolicitud);
+			cout << "Contrato finalizado y eliminado del contenedor.\n";
+
             system("pause");
             break;
         }
@@ -1064,6 +1140,14 @@ void InterfazUsuario::menuReportesClientes() {
             {
 				system("cls");
                 //pendiente
+
+
+
+
+
+
+
+
 
                 system("pause");
                 cout << "Desea ver el reporte de otra sucursal? (s/n): ";
