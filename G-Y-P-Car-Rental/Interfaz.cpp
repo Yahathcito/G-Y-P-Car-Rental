@@ -28,7 +28,7 @@ void InterfazUsuario::menuPrincipal() {
         cout << "5. Reportes de Planteles y Alquileres\n";
         cout << "0. Salir\n";
         cout << "---------------------------------------------\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -424,10 +424,11 @@ void InterfazUsuario::menuPlantelesVehiculos() {
     //Plantel* plantel = nullptr; 
     Carro* carro = nullptr;
 	EspacioEstacionamiento* espacio = nullptr;
-    int opcion,filas,columnas,modelo,tipoOpcion;
+    int opcion,filas,columnas,modelo,tipoOpcion,estadoNuevo;
     char codigoPlantel,codigoPlantelIntercambio;
-    string codigo,placa, marca,codigoEspacio,licenciaRequerida,codigoIntercambio;
+    string codigo,placa, marca,codigoEspacio,licenciaRequerida,codigoIntercambio,IdColaborador;
     string tipo[4] = { "Economico","Estandar","Lujo","4x4" };
+    string estadosDisponibles[3] = { "Disponible","Revision", "Lavado" };
     cout << "Ingrese el codigo de la sucursal en la que desea ingresar: "; cin >> codigo; 
     Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigo); 
     if (!sucursal) {
@@ -536,7 +537,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                 cout << p->toString();
                 break; 
             }
-            cout << p->recomendarEspacios(); 
+            cout << p->recomendarEspacios() << endl; 
             cout << "Ingrese el codigo del espacio donde desea estacionar el vehiculo: "; cin >> codigoEspacio;
             espacio = p->buscarEspacio(codigoEspacio);
             if (!espacio->isDisponible()) {
@@ -573,8 +574,50 @@ void InterfazUsuario::menuPlantelesVehiculos() {
             break;
         }
         case 5: {
-
-            // Creo que este case es innceseario y no cumple con el flujo de trabajo 
+            cout << "Ingrese la placa del vehículo: "; cin >> placa;
+            Carro* carro = sucursal->getContenedorCarros()->obtenerCarro(placa);
+            if (!carro || carro->getEstado()=="Alquilado") {
+                cout << "Error: No coincide la placa o se encuentra alquilado.\n";
+                system("pause");
+                break;
+            }
+            cout << "Ingrese el ID del colaborador: "; cin >> IdColaborador;
+            Colaborador* colaborador = sucursal->getContenedorColaboradores()->buscarColaborador(IdColaborador); 
+            if (!colaborador) {
+                cout << "Error: El cliente no existe.\n";
+                system("pause");
+                break; 
+            }
+            string estadoActual =  carro->getEstado(); 
+            cout << "Estado actual: "<< estadoActual << endl;
+            carro->mostrarEstadosParaPlantel(); 
+            cout << "Ingrese el nuevo estado: "; cin >> estadoNuevo; 
+            if (estadoNuevo<1||estadoNuevo>3) {
+                cout << "Error: Opcion incorrecta.\n"; 
+                break; 
+            }
+            if ((estadoActual == "Disponible" || estadoActual == "Devuelto") && (estadosDisponibles[estadoNuevo - 1] == "Revision" || estadosDisponibles[estadoNuevo - 1] == "Lavado")) {
+                cout << "Ingrese la fecha actual: "; string fecha; cin >> fecha; 
+                carro->cambiarEstado(carro->getEstado(),estadosDisponibles[estadoNuevo-1],colaborador->getId(), fecha);
+                cout << "Trancision de estado exitosa!\n";
+                system("pause");
+                break; 
+            }
+            if (estadoActual == "Revision" && estadosDisponibles[estadoNuevo - 1] == "Lavado") {
+                cout << "Ingrese la fecha actual: "; string fecha; cin >> fecha;
+                carro->cambiarEstado(carro->getEstado(), estadosDisponibles[estadoNuevo - 1], colaborador->getId(), fecha);
+                cout << "Trancision de estado exitosa!\n";
+                system("pause");
+                break;
+            }
+            if (estadoActual == "Lavado" && estadosDisponibles[estadoNuevo - 1] == "Disponible" || estadosDisponibles[estadoNuevo - 1] == "Revision") {
+                cout << "Ingrese la fecha actual: "; string fecha; cin >> fecha;
+                carro->cambiarEstado(carro->getEstado(), estadosDisponibles[estadoNuevo - 1], colaborador->getId(), fecha);
+                cout << "Trancision de estado exitosa!\n"; 
+                system("pause");
+                break;
+            }
+            cout << "Transicion de estado invalida.\n"; 
             system("pause");
             break;
         }
@@ -665,7 +708,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     cout << "Error: El espacio ya esta ocupado.\n";
                     break;
                 }
-                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio);
+                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio,sucursalIntercambio);
                 cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
                 break; 
             }
@@ -677,7 +720,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     cout << "Error: El espacio ya esta ocupado.\n";
                     break;
                 }
-                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio);
+                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio,sucursalIntercambio);
                 cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
             }
             system("pause");*/
@@ -765,15 +808,24 @@ void InterfazUsuario::menuReportesClientes() {
 //  REPORTES DE PLANTELES Y ALQUILERES
 // =====================================================
 void InterfazUsuario::menuReportesPlantelesAlquileres() {
+    string codigoS; 
+    cout << "Ingrese el codigo de la sucursal en la que desea ingresar: "; cin >> codigoS;
+    Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigoS);
+    if (!sucursal) {
+        cout << "El codigo ingresado no pertenece a ninguna sucursal.\n";
+        system("pause");
+        return;
+    }
     int opcion;
+    string placaCarro; 
     do {
         system("cls");
         cout << "=============================================\n";
         cout << "   MÓDULO: REPORTES DE PLANTELES Y ALQUILERES\n";
         cout << "=============================================\n";
-        cout << "1. Bitácora de estados de un vehículo\n";
-        cout << "2. Contratos de un vehículo específico\n";
-        cout << "3. Porcentaje de ocupación de planteles\n";
+        cout << "1. Bitacora de estados de un vehiculo\n";
+        cout << "2. Contratos de un vehiculo especifico\n";
+        cout << "3. Porcentaje de ocupacion de planteles\n";
         cout << "4. Contratos por sucursal (recientes primero)\n";
         cout << "5. Reporte de alquileres por colaborador\n";
         cout << "0. Volver\n";
@@ -782,9 +834,14 @@ void InterfazUsuario::menuReportesPlantelesAlquileres() {
         cin >> opcion;
 
         switch (opcion) {
-        case 1:
-            // contenedorSucursales->getSucursalActual()->bitacoraVehiculo();
+        case 1: {
+            cout <<sucursal->getContenedorPlanteles()->mostrarCarrosXPlantel();
+            cout << "Digite la placa del carro deseado: "; cin >> placaCarro;
+            Carro* c = sucursal->getContenedorCarros()->obtenerCarro(placaCarro);
+            cout << c->getBitacora()->toString();
+            system("pause");
             break;
+        }
         case 2:
             // contenedorSucursales->getSucursalActual()->contratosPorVehiculo();
             break;

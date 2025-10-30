@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
+#include "ContenedorBitacoras.h"
 class Carro {
 private:
 	string placa;
@@ -10,6 +11,7 @@ private:
 	string categoria;
 	string tipoLicencia; 
 	string estado; 
+	ContenedorBitacoras* bitacorasDelCarro; 
 public:
 	Carro(string,int,string,string,string);
 	void setPlaca(string);
@@ -22,8 +24,11 @@ public:
 	int getModelo();
 	string getMarca();
 	string getCategoria();
-	string toString();
 	string getEstado(); 
 	string getTipoLicencia(); 
+	void mostrarEstadosParaPlantel(); 
+	ContenedorBitacoras* getBitacora(); 
+	void cambiarEstado(string,string,string,string); 
+	string toString();
 };
 

@@ -19,7 +19,7 @@ NodoBitacorasEstadoDelCarro* NodoBitacorasEstadoDelCarro::getSiguiente()
 {
 	return siguiente;
 }
-NodoBitacorasEstadoDelCarro* NodoBitacorasEstadoDelCarro::setSiguiente(NodoBitacorasEstadoDelCarro* siguiente)
+void NodoBitacorasEstadoDelCarro::setSiguiente(NodoBitacorasEstadoDelCarro* siguiente)
 {
-	return this->siguiente = siguiente;
+	 this->siguiente = siguiente;
 }

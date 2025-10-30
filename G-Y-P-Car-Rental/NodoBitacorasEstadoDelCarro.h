@@ -1,17 +1,15 @@
 #pragma once
 #include "BitacoraEstadosDelCarro.h"
-
-class NodoBitacorasEstadoDelCarro
-{
+class NodoBitacorasEstadoDelCarro{
 	private:
-	BitacoraEstadosDelCarro* bitacora;
-	NodoBitacorasEstadoDelCarro* siguiente;
-public:
-	NodoBitacorasEstadoDelCarro(BitacoraEstadosDelCarro* bitacora, NodoBitacorasEstadoDelCarro* siguiente);
-	~NodoBitacorasEstadoDelCarro();
-	BitacoraEstadosDelCarro* getBitacora();
-	NodoBitacorasEstadoDelCarro* getSiguiente();
-	NodoBitacorasEstadoDelCarro* setSiguiente(NodoBitacorasEstadoDelCarro* siguiente);
+		BitacoraEstadosDelCarro* bitacora;
+		NodoBitacorasEstadoDelCarro* siguiente;
+	public:
+		NodoBitacorasEstadoDelCarro(BitacoraEstadosDelCarro*, NodoBitacorasEstadoDelCarro*);
+		~NodoBitacorasEstadoDelCarro();
+		BitacoraEstadosDelCarro* getBitacora();
+		NodoBitacorasEstadoDelCarro* getSiguiente();
+		void setSiguiente(NodoBitacorasEstadoDelCarro*);
 
 };
 

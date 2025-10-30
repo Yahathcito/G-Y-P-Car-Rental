@@ -7,6 +7,7 @@ Carro::Carro(string placa, int modelo, string marca, string categoria,string tip
     this->categoria = categoria;
     this->tipoLicencia = tipoLicencia; 
     this->estado = "Disponible";
+    bitacorasDelCarro = new ContenedorBitacoras(); 
 }
 
 void Carro::setPlaca(string p) { placa = p; }
@@ -46,6 +47,23 @@ string Carro::getEstado(){
 
 string Carro::getTipoLicencia(){
     return tipoLicencia;
+}
+
+void Carro::mostrarEstadosParaPlantel(){
+    string estados[3] = { "Disponible","Revision", "Lavado" }; 
+    for (int i = 0; i < 3; i++) {
+        cout << i+1 <<"- " << estados[i] << "." << endl;
+    }
+}
+
+ContenedorBitacoras* Carro::getBitacora(){
+    return bitacorasDelCarro;
+}
+
+void Carro::cambiarEstado(string estadoAnterior, string estadoNuevo,string IdColaborador,string fecha){
+    BitacoraEstadosDelCarro* bitacora = new BitacoraEstadosDelCarro(estadoAnterior, estadoNuevo, IdColaborador, fecha); 
+    bitacorasDelCarro->registrarBitacora(bitacora); 
+    estado = estadoNuevo; 
 }
 
 string Carro::toString() {
