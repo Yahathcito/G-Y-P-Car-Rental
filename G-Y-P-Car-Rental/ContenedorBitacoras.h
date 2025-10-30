@@ -1,14 +1,14 @@
 #pragma once
 #include "NodoBitacorasEstadoDelCarro.h"
-
-class ContenedorBitacoras
-{
+class ContenedorBitacoras{
 	private:
-		NodoBitacorasEstadoDelCarro* cabeza;
+		NodoBitacorasEstadoDelCarro* ppio;
 	public:
 		ContenedorBitacoras();
-		~ContenedorBitacoras();
+		virtual ~ContenedorBitacoras();
 		bool estaVacio();
+		void registrarBitacora(BitacoraEstadosDelCarro*);
+		string toString(); 
 
 };
 

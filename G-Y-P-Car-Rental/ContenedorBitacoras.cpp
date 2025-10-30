@@ -1,23 +1,30 @@
 #include "ContenedorBitacoras.h"
 
-ContenedorBitacoras::ContenedorBitacoras()
-{
-	this->cabeza = nullptr;
-}
+ContenedorBitacoras::ContenedorBitacoras():ppio(nullptr){}
 
-ContenedorBitacoras::~ContenedorBitacoras()
-{
-	NodoBitacorasEstadoDelCarro* actual = cabeza;
-	while (actual != nullptr) {
-		NodoBitacorasEstadoDelCarro* siguiente = actual->getSiguiente();
+ContenedorBitacoras::~ContenedorBitacoras(){
+	NodoBitacorasEstadoDelCarro* actual = ppio;
+	while (ppio != nullptr) {
+		actual = ppio;
+		ppio = ppio->getSiguiente();
 		delete actual;
-		actual = siguiente;
 	}
 }
 
 
-bool ContenedorBitacoras::estaVacio()
-{
-	return cabeza == nullptr;
+bool ContenedorBitacoras::estaVacio(){ return ppio == nullptr; }
+
+void ContenedorBitacoras::registrarBitacora(BitacoraEstadosDelCarro* bitacora){
+	ppio = new NodoBitacorasEstadoDelCarro(bitacora, ppio); 
+}
+
+string ContenedorBitacoras::toString(){
+	stringstream s; 
+	NodoBitacorasEstadoDelCarro* aux = ppio; 
+	while (aux != nullptr) {
+		s << aux->getBitacora()->toString(); 
+		aux = aux->getSiguiente(); 
+	}
+	return s.str();
 }
 

@@ -36,7 +36,7 @@ public:
 	Plantel* getPlantel(char); 
 	bool validarPlantel(char); 
 	bool NoexistePlantel(); 
-	void intercambiarCarro(Plantel*,string,Carro* ,EspacioEstacionamiento* );
+	void intercambiarCarro(Plantel*,string,Carro* ,EspacioEstacionamiento*,Sucursal*);
 	string toString();
 };
 
