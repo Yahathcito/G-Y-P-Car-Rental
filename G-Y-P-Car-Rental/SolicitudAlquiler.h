@@ -9,13 +9,17 @@ class SolicitudAlquiler
 	string idSolicitud;
 	string idCliente;
 	string idColaborador;
+	string placaVehiculo;
 	int canDiasAlquiler;
 	string fechaInicioAlquiler;
 	string fechaFinAlquiler;
 	float precioAlquiler;
-	string estadoSolicitud[4];
+	float precioDias;
+	string estadoSolicitud;
 public:
-	SolicitudAlquiler(string, string, string, int, string, string, float, string[]);
+
+	SolicitudAlquiler(string, string, string, string, int, string, string, float, float, string);
+
 	string getIdSolicitud();
 	string getIdCliente();
 	string getIdColaborador();
@@ -23,8 +27,12 @@ public:
 	string getFechaInicioAlquiler();
 	string getFechaFinAlquiler();
 	float getPrecioAlquiler();
-	string* getEstadoSolicitud();
+	float getPrecioDias();
+	string getPlacaVehiculo();
+
+	string getEstadoSolicitud();
 	string toString();
+	void setEstadoSolicitud(string);
 
 
 

@@ -30,5 +30,6 @@ public:
 	ContenedorBitacoras* getBitacora(); 
 	void cambiarEstado(string,string,string,string); 
 	string toString();
+	bool verificarDisponibilidad();
 };
 
