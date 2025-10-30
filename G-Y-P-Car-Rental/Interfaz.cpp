@@ -999,7 +999,22 @@ void InterfazUsuario::menuSolicitudesContratos() {
         }
         case 5: {
 			system("cls");
-			//aca se va a finalizar el contrato, ver que tipo de devolucion debe hacerse y luego se va a colocar el carro en disponible
+			//aca se va a finalizar el contrato, ver que tipo de devolucion debe hacerse y luego se va a colocar el carro en devueto 
+			cout << "Digite el codigo de la sucursal en la que desea operar: ";
+			cin >> codigoSucursal;
+			sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+            if (!sucursal) {
+                cout << "Error: Sucursal no encontrada.\n";
+            }
+			cout << "Digite el ID del contrato a finalizar: ";
+			cin >> idSolicitud;
+            if (!sucursal->getContenedorContratoAlquiler()->buscarContratoAlquiler(idSolicitud)) {
+                cout << "Error: Contrato no encontrado.\n";
+            }
+			sucursal->getContenedorContratoAlquiler()->eliminarContratoAlquiler(idSolicitud);
+
+			// debe hacerse el cambio de estado del carro a "Devuelto"
+
             system("pause");
             break;
         }
@@ -1077,6 +1092,14 @@ void InterfazUsuario::menuReportesClientes() {
             {
 				system("cls");
                 //pendiente
+
+
+
+
+
+
+
+
 
                 system("pause");
                 cout << "Desea ver el reporte de otra sucursal? (s/n): ";
