@@ -74,8 +74,9 @@ bool Sucursal::NoexistePlantel(){
 	return this->getContenedorPlanteles()->estaVacio(); 
 }
 
-void Sucursal::intercambiarCarro(Plantel* plantelActual, string placa, Carro* carro, EspacioEstacionamiento* espacio){
+void Sucursal::intercambiarCarro(Plantel* plantelActual, string placa, Carro* carro, EspacioEstacionamiento* espacio,Sucursal* sucursalIntercambio){
 	espacio->estacionarCarro(carro); 
+	sucursalIntercambio->getContenedorCarros()->agregarCarro(carro);
 	plantelActual->eliminarCarro(placa);
 	this->getContenedorCarros()->eliminarCarro(placa); 
 }
