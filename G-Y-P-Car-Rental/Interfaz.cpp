@@ -976,10 +976,23 @@ void InterfazUsuario::menuSolicitudesContratos() {
             sucursal->getContenedorContratoAlquiler()->agregarContratoAlquiler(nuevoContrato);
             cout << "Contrato creado exitosamente desde la solicitud aprobada!\n";
 
+           
+
+			Carro* carroAlquilado = sucursal->getContenedorCarros()->buscarCarroPorPlaca(solicitud->getPlacaVehiculo());
+			if (carroAlquilado) {   
+			
+				carroAlquilado->cambiarEstado(carroAlquilado->getEstado(), "Alquilado", solicitud->getIdColaborador(), solicitud->getFechaInicioAlquiler());
+			}
+            else
+            {
+				cout << "Error: No se encontro el vehiculo para cambiar su estado a 'Alquilado'.\n";
+            }
+
+
             // Eliminar solicitud del contenedor
             sucursal->getContenedorSolicitudAlquiler()->eliminarSolicitud(idSolicitud);
             cout << "Solicitud eliminada del contenedor.\n";
-			// aca se debe cambiar el estado del carro a no disponible
+
 
             system("pause");
             break;
