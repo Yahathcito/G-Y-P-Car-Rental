@@ -793,7 +793,21 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     continue; // volver a intentar dentro del ciclo interno
                 }
 				cout << "===== CREAR SOLICITUD DE ALQUILER EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << "===== LISTA DE SOLICITUDES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+                cout << sucursal->getContenedorSolicitudAlquiler()->toString();
+               
 				cout << "Ingrese el ID de la solicitud: "; cin >> idSolicitud;
+                //la de clientes 
+                if (sucursal->getContenedorSolicitudAlquiler()->buscarSolicitudPorId(idSolicitud)) {
+                    cout << "Error: Ya existe una solicitud con esa ID.\n";
+                    system("pause");
+					continue; // volver a intentar dentro del ciclo interno
+				}
+				// muestra los clientes disponibles en la sucursal
+				cout << "===== LISTA DE CLIENTES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << sucursal->getContenedorClientes()->toString();
+
+
 				cout << "Ingrese el ID del cliente: "; cin >> idCliente;
 				//comprobar si el cliente existe
                 if (!sucursal->getContenedorClientes()->getClienteXId(idCliente)) {
@@ -801,6 +815,10 @@ void InterfazUsuario::menuSolicitudesContratos() {
                     system("pause");
                     continue; // volver a intentar dentro del ciclo interno
 				}
+				// muestra los colaboradores disponibles en la sucursal
+				cout << "===== LISTA DE COLABORADORES EN LA SUCURSAL " << sucursal->getNumUnico() << " =====\n";
+				cout << sucursal->getContenedorColaboradores()->toString();
+
 				cout << "Ingrese el ID del colaborador que atiende la solicitud: "; cin >> idColaborador;
                 //comprobar si el colaborador existe
                 if (!sucursal->getContenedorColaboradores()->buscarColaborador(idColaborador)) {
@@ -815,12 +833,12 @@ void InterfazUsuario::menuSolicitudesContratos() {
                 if (!carroAlquiler) {
                     cout << "Error: No existe un vehiculo con esa placa.\n";
                     system("pause");
-                    continue; // volver a intentar dentro del ciclo interno
+                    continue; 
                 }
                 if (!carroAlquiler->verificarDisponibilidad()) {
                     cout << "Error: El vehiculo no está disponible para alquiler.\n";
                     system("pause");
-                    continue; // volver a intentar dentro del ciclo interno
+                    continue;
 				}
 				cout << "Ingrese la fecha de inicio del alquiler (DD/MM/AAAA): "; cin >> fechaInicio;
 				cout << "Ingrese la fecha de entrega del vehiculo (DD/MM/AAAA): "; cin >> fechaEntrega;
