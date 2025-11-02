@@ -1,5 +1,7 @@
 #pragma once
 #include "NodoColaborador.h"
+#include "Colaborador.h"
+#include "ContenedorContratoAlquiler.h"
 class ContenedorColaboradores
 {
 private:
@@ -13,6 +15,8 @@ public:
     void eliminarColaborador(const string& id);
     Colaborador* buscarColaborador(const string& id);
     bool estaVacio() const;
+    void reporteAlquileresPorColaborador(ContenedorContratoAlquiler* contenedorContratos);
+
 	string toString();
 };
 

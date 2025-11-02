@@ -99,6 +99,19 @@ void ContenedorContratoAlquiler::contarContratosPorCliente(string idCliente, int
 	}
 
 }
+NodoContratoAlquiler* ContenedorContratoAlquiler::getCabeza()
+{
+	return cabeza;
+}
+void ContenedorContratoAlquiler::reporteContratosPorSucursal()
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		cout << actual->getContratoAlquiler()->toString() << "\n";
+		actual = actual->getSiguiente();
+	}
+}
+
 string ContenedorContratoAlquiler::toString()
 {
 	stringstream s;
