@@ -88,6 +88,17 @@ void ContenedorContratoAlquiler::mostrarContratosPorCliente(string idCliente)
 		actual = actual->getSiguiente();
 	}
 }
+void ContenedorContratoAlquiler::contarContratosPorCliente(string idCliente, int& contador)
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getContratoAlquiler()->getIdCliente() == idCliente) {
+			contador++;
+		}
+		actual = actual->getSiguiente();
+	}
+
+}
 string ContenedorContratoAlquiler::toString()
 {
 	stringstream s;

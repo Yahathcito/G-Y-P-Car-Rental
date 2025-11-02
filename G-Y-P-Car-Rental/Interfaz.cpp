@@ -66,7 +66,7 @@ void InterfazUsuario::menuDatosGenerales() {
         case 2: menuClientes(); break;
         case 3: menuColaboradores(); break;
         case 0: break;
-        default: cout << "\nOpción invalida.\n"; system("pause");
+        default: cout << "\nOpcion invalida.\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -145,14 +145,14 @@ void InterfazUsuario::menuClientes() {
     
     do {
         system("cls");
-        cout << "-------- Gestión de Clientes --------\n";
+        cout << "-------- Gestion de Clientes --------\n";
         cout << "1. Registrar cliente normal\n";
         cout << "2. Registrar cliente juridico\n";
         cout << "3. Eliminar cliente\n";
         cout << "4. Mostrar todos los clientes\n";
         cout << "0. Volver\n";
         cout << "-------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -297,13 +297,13 @@ void InterfazUsuario::menuColaboradores() {
    
     do {
         system("cls");
-        cout << "-------- Gestión de Colaboradores --------\n";
+        cout << "-------- Gestion de Colaboradores --------\n";
         cout << "1. Registrar colaborador\n";
         cout << "2. Eliminar colaborador\n";
         cout << "3. Mostrar colaboradores\n";
         cout << "0. Volver\n";
         cout << "------------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -420,7 +420,7 @@ void InterfazUsuario::menuColaboradores() {
             } while (true);
             break;
         case 0: break;
-        default: cout << "Opción invalida\n"; system("pause");
+        default: cout << "Opcion invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }
@@ -447,7 +447,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
     do {
         system("cls");
         cout << "=============================================\n";
-        cout << "     MÓDULO: PLANTELES, PARQUEOS Y VEHÍCULOS\n";
+        cout << "     MODULO: PLANTELES, PARQUEOS Y VEHÍCULOS\n";
         cout << "=============================================\n";
         cout << "1. Crear plantel en sucursal\n";
         cout << "2. Mostrar distribucion de espacios\n";
@@ -459,7 +459,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
         cout << "8. Interacmbiar vehiculo entre sucursales\n";
         cout << "0. Volver al menu principal\n";
         cout << "---------------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -1083,15 +1083,26 @@ void InterfazUsuario::menuSolicitudesContratos() {
 void InterfazUsuario::menuReportesClientes() {
     int opcion;
     do {
+		if (contenedorSucursales->estaVacio())
+
+        {
+            cout << "No hay sucursales registradas.\n";
+            system("pause");
+            return;
+        }
+		
+
+
         system("cls");
+
         cout << "=============================================\n";
-        cout << "           MÓDULO: REPORTES DE CLIENTES\n";
+        cout << "           MODULO: REPORTES DE CLIENTES\n";
         cout << "=============================================\n";
         cout << "1. Historial de cliente (solicitudes y contratos)\n";
         cout << "2. Reporte de clientes por cantidad de contratos\n";
         cout << "0. Volver\n";
         cout << "---------------------------------------------\n";
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -1139,12 +1150,19 @@ void InterfazUsuario::menuReportesClientes() {
             do
             {
 				system("cls");
-                //pendiente
-
-
-
-
-
+              
+				cout << "Ingrese el codigo de la sucursal en la que desea operar: ";
+				string codigoSucursal;
+				cin >> codigoSucursal;
+				Sucursal* sucursal = contenedorSucursales->buscarSucursal(codigoSucursal);
+                if (!sucursal) {
+                    cout << "Error: Sucursal no encontrada.\n";
+                }
+               /* Reporte de clientes por cantidad de contratos : Ordena en la lista los
+                    clientes por cantidad de alquileres realizados, iniciando por el cliente
+                    que más alquileres haya hecho.Debe incluir el id y el nombre del
+                    cliente, así como el código de los contratos de alquiler realizados. hazlo de esta manera y logica */
+				sucursal->getContenedorClientes()->reporteClientesPorCantidadContratos(sucursal->getContenedorContratoAlquiler());  
 
 
 
@@ -1160,7 +1178,7 @@ void InterfazUsuario::menuReportesClientes() {
             } while (true);
             break;
         case 0: break;
-        default: cout << "Opción inválida\n"; system("pause");
+        default: cout << "Opcion invalida\n"; system("pause");
         }
     } while (opcion != 0);
 }
