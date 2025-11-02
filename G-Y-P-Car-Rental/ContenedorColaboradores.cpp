@@ -47,6 +47,29 @@ bool ContenedorColaboradores::estaVacio() const {
 	return cabeza == nullptr;
 }
 
+void ContenedorColaboradores::reporteAlquileresPorColaborador(ContenedorContratoAlquiler* contenedorContratos)
+{
+	if (!contenedorContratos) return;
+
+	NodoColaborador* actual = cabeza;
+	while (actual) {
+		Colaborador* colaborador = actual->getColaborador();
+		cout << "Colaborador ID: " << colaborador->getId() << ", Nombre: " << colaborador->getNombre() << "\n";
+
+		NodoContratoAlquiler* contratoActual = contenedorContratos->getCabeza();
+		while (contratoActual) {
+			ContratoAlquiler* contrato = contratoActual->getContratoAlquiler();
+			if (contrato->getIdColaborador() == colaborador->getId()) {
+				cout << "  Contrato ID: " << contrato->getIdContrato()
+					<< ", Placa Vehiculo: " << contrato->getPlacaVehiculo()
+					<< ", Cliente ID: " << contrato->getIdCliente() << "\n";
+			}
+			contratoActual = contratoActual->getSiguiente();
+		}
+		actual = actual->getSiguiente();
+	}
+}
+
 string ContenedorColaboradores::toString() {
 	stringstream ss;
 	NodoColaborador* actual = cabeza;

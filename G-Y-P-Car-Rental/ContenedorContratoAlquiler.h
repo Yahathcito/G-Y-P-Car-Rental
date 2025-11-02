@@ -14,6 +14,10 @@ public:
 		void agregarContratoAlquiler(ContratoAlquiler* nuevoContrato);
 		void finalizarContrato(string idContrato);
 		void mostrarContratosPorCliente(string idCliente);
+		void contarContratosPorCliente(string idCliente, int& contador);
+		NodoContratoAlquiler* getCabeza();
+		void reporteContratosPorSucursal();
+	
 		string toString();
 
 };

@@ -73,3 +73,23 @@ void ContenedorClientes::eliminarCliente(string id)
 	}
 	delete actual;
 }
+
+void ContenedorClientes::reporteClientesPorCantidadContratos(ContenedorContratoAlquiler* contenedorContratos)
+{
+	/////*Reporte de clientes por cantidad de contratos : Ordena en la lista los
+	////	clientes por cantidad de alquileres realizados, iniciando por el cliente
+	////	que más alquileres haya hecho.Debe incluir el id y el nombre del
+	////	cliente, así como el código de los contratos de alquiler realizados.*/
+	if (estaVacia()) {
+		cout << "No hay clientes registrados.\n";
+		return;
+	}
+	NodoCliente* actual = ppio;
+	while (actual != nullptr) {
+		int contador = 0;
+		contenedorContratos->contarContratosPorCliente(actual->getCliente()->getId(), contador);
+		cout << "Cliente ID: " << actual->getCliente()->getId() << ", Nombre: " << actual->getCliente()->getNombre() << ", Cantidad de contratos: " << contador << "\n";
+		actual = actual->getSiguiente();
+	}
+
+}
