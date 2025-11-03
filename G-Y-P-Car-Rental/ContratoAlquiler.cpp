@@ -87,6 +87,7 @@ string ContratoAlquiler::getEstadoContrato()
 string ContratoAlquiler::toString()
 {
 	stringstream s;
+	s << "---------------------------------\n";
 	s << "ID Contrato: " << idContrato << "\n";
 	s << "ID Cliente: " << idCliente << "\n";
 	s << "ID Colaborador: " << idColaborador << "\n";
@@ -97,6 +98,7 @@ string ContratoAlquiler::toString()
 	s << "Precio Diario: " << precioDiario << "\n";
 	s << "Precio Total: " << precioTotal << "\n";
 	s << "Estado Contrato: " << estadoContrato << "\n";
+	s << "---------------------------------\n";
 	return s.str();
 }
 

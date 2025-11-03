@@ -54,25 +54,35 @@ bool Plantel::eliminarCarro(string placa){
 	return false;
 }
 
-string Plantel::mostrarCarrosXPlantel(){
-	stringstream s; 
-	s << "--------------------------\n"; 
-	s << "VEHICULOS DEL PLANTEL ' " << id << " '\n";
+string Plantel::mostrarCarrosXPlantel() {
+	stringstream s;
 	s << "--------------------------\n";
-	for (int i = 0; i < filas;i++) {
-		for (int j = 0; j < columnas;j++) {
-			if (!espacio[i][j]->isDisponible())
-				s << espacio[i][j]->getCarro()->toString() << endl; 
+	s << "VEHICULOS DEL PLANTEL '" << id << "'\n";
+	s << "--------------------------\n";
+
+	for (int i = 0; i < filas; i++) {
+		for (int j = 0; j < columnas; j++) {
+			if (espacio[i][j] != nullptr && !espacio[i][j]->isDisponible()) {
+				Carro* carro = espacio[i][j]->getCarro();
+				if (carro != nullptr) {
+					s << carro->toString() << endl;
+				}
+			}
 		}
 	}
+
 	return s.str();
 }
 
 
-Carro* Plantel::getCarro(string placa){
-	for (int i = 0; i < filas;i++) {
-		for (int j = 0; j < columnas;j++) {
-			if (espacio[i][j]->getCarro()->getPlaca() == placa) return espacio[i][j]->getCarro(); 
+Carro* Plantel::getCarro(string placa) {
+	for (int i = 0; i < filas; i++) {
+		for (int j = 0; j < columnas; j++) {
+			if (!espacio[i][j]->isDisponible()) {
+				Carro* c = espacio[i][j]->getCarro();
+				if (c != nullptr && c->getPlaca() == placa)
+					return c;
+			}
 		}
 	}
 	return nullptr;
@@ -117,7 +127,7 @@ string Plantel::recomendarEspacios(){
 					if (!espacio[i][j-1]->isDisponible())
 						vecinosDisponibles = false;
 				}
-				if (j + 1 < filas) {
+				if (j + 1 < columnas) {
 					if (!espacio[i][j+1]->isDisponible())
 						vecinosDisponibles = false;
 				}
@@ -130,6 +140,18 @@ string Plantel::recomendarEspacios(){
 		}
 	}
 	return s.str(); 
+}
+
+float Plantel::calcularPorcentajeOcupacion(){
+	int cont = 0; 
+	int espaciosTotales = filas * columnas; 
+	for (int i = 0; i < filas;i++) {
+		for (int j = 0; j < columnas;j++) {
+			if (!espacio[i][j]->isDisponible())
+				cont++; 
+		}
+	}
+	return (static_cast<float>(cont)/espaciosTotales)*100.0f;
 }
 
 string Plantel::toString() {

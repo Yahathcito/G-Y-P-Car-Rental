@@ -24,6 +24,7 @@ public:
 		bool existenCarros(); 
 		string mostrarEspacioEspecifico(string);
 		string recomendarEspacios(); 
+		float calcularPorcentajeOcupacion();
 		string toString();
 };
 

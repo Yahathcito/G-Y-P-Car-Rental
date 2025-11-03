@@ -58,6 +58,7 @@ string SolicitudAlquiler::getEstadoSolicitud()
 string SolicitudAlquiler::toString()
 {
 	stringstream s;
+	s << "---------------------------------\n";
 	s << "ID Solicitud: " << idSolicitud << "\n";
 	s << "ID Cliente: " << idCliente << "\n";
 	s << "ID Colaborador: " << idColaborador << "\n";
@@ -68,6 +69,7 @@ string SolicitudAlquiler::toString()
 	s << "Precio Alquiler: " << precioAlquiler << "\n";
 	s << "Precio Dias: " << precioDias << "\n";
 	s << "Estado Solicitud: " << estadoSolicitud << "\n";
+	s << "---------------------------------\n";
 	return s.str();
 }
 

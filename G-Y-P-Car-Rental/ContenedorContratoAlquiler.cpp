@@ -88,6 +88,20 @@ void ContenedorContratoAlquiler::mostrarContratosPorCliente(string idCliente)
 		actual = actual->getSiguiente();
 	}
 }
+string ContenedorContratoAlquiler::mostrarContratosPorCarro(string placa){
+	bool bandera = false; 
+	NodoContratoAlquiler* aux = cabeza; 
+	stringstream s; 
+	while (aux != nullptr) {
+		if (aux->getContratoAlquiler()->getPlacaVehiculo()==placa) {
+			s << aux->getContratoAlquiler()->toString(); 
+			bandera = true; 
+		}
+		aux = aux->getSiguiente(); 
+	}
+	if (!bandera) return "Este carro no posee contratos.\n";
+	else return s.str(); 
+}
 string ContenedorContratoAlquiler::toString()
 {
 	stringstream s;

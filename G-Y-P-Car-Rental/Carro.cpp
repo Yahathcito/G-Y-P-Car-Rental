@@ -72,9 +72,9 @@ string Carro::toString() {
     s << "Modelo: " << modelo << endl;
     s << "Marca: " << marca << endl;
     s << "Categoria: " << categoria << endl;
-    s << "Tipo de licencia requerida: " << tipoLicencia << endl; 
-    s << "Estado actual: " << estado << endl; 
-    return s.str();
+    s << "Tipo de licencia requerida: " << tipoLicencia << endl;
+    s << "Estado actual: " << estado << endl;
+    return s.str(); 
 }
 
 
