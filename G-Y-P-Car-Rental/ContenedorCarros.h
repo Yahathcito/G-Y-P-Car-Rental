@@ -15,6 +15,7 @@ class ContenedorCarros
 		Carro* buscarCarroPorPlaca(string);
 		Carro* obtenerCarro(string); 
 		string mostrarTipoDeCarros();
+		Carro* copiarCarro(string);
 		string toString();
 };
 

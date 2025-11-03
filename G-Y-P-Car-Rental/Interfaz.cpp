@@ -693,13 +693,13 @@ void InterfazUsuario::menuPlantelesVehiculos() {
             cout << "Digite el plantel donde desea obtener el carro: "; cin >> codigoPlantel; 
             Plantel* plantelActual = sucursal->getPlantel(codigoPlantel); 
             if (!plantelActual || !plantelActual->existenCarros()) {
-                cout << "Error: Plantel o existencia de carros no encontrados.\n";
+                cout << "Error: Plantel o existencia de carros invalida.\n";
                 break; 
             }
             cout << plantelActual->mostrarCarrosXPlantel(); 
             cout << "Digite la placa del carro que desea intercambiar: "; cin >> placa; 
-            carro = plantelActual->getCarro(placa); 
-            if (!carro) {
+            Carro* c = sucursal->getContenedorCarros()->copiarCarro(placa); 
+            if (!c) {
                 cout << "Error: La placa digitada no existe.\n"; 
                 break; 
             }
@@ -725,7 +725,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     cout << "Error: El espacio ya esta ocupado.\n";
                     break;
                 }
-                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio,sucursalIntercambio);
+                sucursal->intercambiarCarro(plantelActual, placa, c, espacio,sucursalIntercambio);
                 cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
                 break; 
             }
@@ -737,7 +737,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     cout << "Error: El espacio ya esta ocupado.\n";
                     break;
                 }
-                sucursal->intercambiarCarro(plantelActual, placa, carro, espacio,sucursalIntercambio);
+                sucursal->intercambiarCarro(plantelActual, placa, c, espacio,sucursalIntercambio);
                 cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
             }
             system("pause");
