@@ -23,10 +23,11 @@ string BitacoraEstadosDelCarro::getFecha() {
 
 string BitacoraEstadosDelCarro::toString() {
 	stringstream ss;
-	
+	ss << "----------------------------\n"; 
 	ss << "Fecha: " << getFecha() << endl;
 	ss << "Estado Anterior: " << getEstadoAnterior() << endl;
 	ss << "Estado Nuevo: " << getEstadoNuevo() << endl;
 	ss << "ID del Colaborador : " << getColaboradorId() << endl;
+	ss << "----------------------------\n";
 	return ss.str();
 }

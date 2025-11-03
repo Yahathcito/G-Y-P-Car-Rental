@@ -20,4 +20,3 @@ public:
 	string getFecha();
 	string toString();
 };
-

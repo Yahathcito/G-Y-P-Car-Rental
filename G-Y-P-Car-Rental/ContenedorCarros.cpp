@@ -45,6 +45,7 @@ Carro* ContenedorCarros::obtenerCarro(string placa){
 	while (aux != nullptr) {
 		if (aux->getCarro()->getPlaca() == placa)
 			return aux->getCarro(); 
+		aux = aux->getSiguiente(); 
 	}
 
 	return nullptr;
@@ -75,7 +76,7 @@ bool ContenedorCarros::eliminarCarro(string placa ){
 	}
 	if (actual == nullptr || actual->getCarro()->getEstado() == "Alquilado") return false;
 	if (anterior == nullptr) {
-		cabeza->setSiguiente(actual->getSiguiente()); 
+		cabeza = actual->getSiguiente();
 	}
 	else {
 		anterior->setSiguiente(actual->getSiguiente()); 
@@ -92,7 +93,8 @@ string ContenedorCarros::toString(){
 		return s.str();
 	}
 	while (aux != nullptr) {
-		s << aux->getCarro()->toString() << "\n";
+		if(aux->getCarro())
+			s << aux->getCarro()->toString() << "\n";
 		aux = aux->getSiguiente();
 	}
 	
