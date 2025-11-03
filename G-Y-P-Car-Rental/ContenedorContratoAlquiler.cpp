@@ -102,6 +102,30 @@ string ContenedorContratoAlquiler::mostrarContratosPorCarro(string placa){
 	if (!bandera) return "Este carro no posee contratos.\n";
 	else return s.str(); 
 }
+void ContenedorContratoAlquiler::contarContratosPorCliente(string idCliente, int& contador)
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		if (actual->getContratoAlquiler()->getIdCliente() == idCliente) {
+			contador++;
+		}
+		actual = actual->getSiguiente();
+	}
+
+}
+NodoContratoAlquiler* ContenedorContratoAlquiler::getCabeza()
+{
+	return cabeza;
+}
+void ContenedorContratoAlquiler::reporteContratosPorSucursal()
+{
+	NodoContratoAlquiler* actual = cabeza;
+	while (actual != nullptr) {
+		cout << actual->getContratoAlquiler()->toString() << "\n";
+		actual = actual->getSiguiente();
+	}
+}
+
 string ContenedorContratoAlquiler::toString()
 {
 	stringstream s;
