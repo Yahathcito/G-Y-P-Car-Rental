@@ -454,9 +454,7 @@ void InterfazUsuario::menuPlantelesVehiculos() {
         cout << "5. Cambiar estado de vehiculo\n";
         cout << "6. Reubicar vehiculo dentro de la sucursal\n";
         cout << "7. Mostrar vehiculos de la sucursal\n";
-        cout << "8. Interacmbiar vehiculo entre sucursales\n";
-        cout << "9. Visualizar carros del contenedor de carros (temporal).\n"; 
-        cout << "8. Intercambiar vehiculo entre sucursales\n";
+        cout << "8. Interacmbiar vehiculo entre sucursales\n"; 
         cout << "0. Volver al menu principal\n";
         cout << "---------------------------------------------\n";
         cout << "Opcion: ";
@@ -726,11 +724,11 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     break;
                 }
                 sucursal->intercambiarCarro(plantelActual, placa, c, espacio,sucursalIntercambio);
-                cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
+                cout << "El carro con placa: = " << placa << " = se ha intercambiado exitosamente.\n";
                 break; 
             }
             else {
-                cout << plantelIntercambio->recomendarEspacios();
+                cout << plantelIntercambio->recomendarEspacios() << endl; 
                 cout << "Ingrese el codigo del espacio donde desea estacionar el vehiculo: "; cin >> codigoEspacio;
                 espacio = plantelIntercambio->buscarEspacio(codigoEspacio);
                 if (!espacio->isDisponible()) {
@@ -738,14 +736,8 @@ void InterfazUsuario::menuPlantelesVehiculos() {
                     break;
                 }
                 sucursal->intercambiarCarro(plantelActual, placa, c, espacio,sucursalIntercambio);
-                cout << "El carro con placa: " << placa << "se ha intercambiado exitosamente.\n";
+                cout << "El carro con placa: = " << placa << " = se ha intercambiado exitosamente.\n";
             }
-            system("pause");
-            break; 
-        }
-        case 9: {
-            cout << "=====LISTADO DE CARROS DEL CONTENEDOR DE LA SUCURSAL=====\n"; 
-            cout << sucursal->getContenedorCarros()->toString(); 
             system("pause");
             break; 
         }

@@ -101,7 +101,7 @@ string Plantel::mostrarEspacioEspecifico(string codigoEspacio){
 	EspacioEstacionamiento* e = this->buscarEspacio(codigoEspacio);
 	Carro* carro = e->getCarro(); 
 	if (carro) {
-		return "Este espacio posee al carro placa: " + this->buscarEspacio(codigoEspacio)->getCarro()->getPlaca();
+		return "Este espacio posee al carro : \n" + this->buscarEspacio(codigoEspacio)->getCarro()->toString();
 	}
 	return "Este espacio no posee un carro.\n"; 
 }
