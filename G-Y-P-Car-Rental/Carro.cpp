@@ -68,12 +68,14 @@ void Carro::cambiarEstado(string estadoAnterior, string estadoNuevo,string IdCol
 
 string Carro::toString() {
     stringstream s;
+	s << "--------------------------\n";
     s << "Placa: " << placa << endl;
     s << "Modelo: " << modelo << endl;
     s << "Marca: " << marca << endl;
     s << "Categoria: " << categoria << endl;
     s << "Tipo de licencia requerida: " << tipoLicencia << endl;
     s << "Estado actual: " << estado << endl;
+	s << "--------------------------\n";
     return s.str(); 
 }
 
