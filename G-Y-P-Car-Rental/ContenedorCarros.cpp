@@ -111,3 +111,16 @@ string ContenedorCarros::mostrarTipoDeCarros(){
 	return s.str();
 }
 
+Carro* ContenedorCarros::copiarCarro(string placa){
+	NodoCarro* aux = cabeza; 
+	while (aux != nullptr) {
+		if (aux->getCarro()->getPlaca()==placa) {
+			Carro* car = aux->getCarro(); 
+			Carro* carrito = new Carro(car->getPlaca(),car->getModelo(), car->getMarca(), car->getCategoria(), car->getTipoLicencia());
+			return carrito; 
+		}
+		aux = aux->getSiguiente(); 
+	}
+	return nullptr;
+}
+
