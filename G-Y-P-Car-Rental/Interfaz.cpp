@@ -172,20 +172,16 @@ void InterfazUsuario::menuClientes() {
 					continue; // Volver al inicio del bucle para intentar de nuevo
                 }
 
-				//cout << "Ingrese el ID del cliente: "; cin >> id;
-				//if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
-				//	cout << "Error: Ya existe un cliente con esa ID.\n";
-				//	system("pause");
-				//	continue; // Volver al inicio del bucle para intentar de nuevo
-				//}
-				//cin.ignore(); // Limpiar el buffer de entrada
-				//cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
-				//cout << "Ingrese el país de residencia del cliente: "; cin >> pais;
+				cout << "Ingrese el ID del cliente: "; cin >> id;
+				if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
+					cout << "Error: Ya existe un cliente con esa ID.\n";
+					system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cin.ignore(); // Limpiar el buffer de entrada
+				cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
+				cout << "Ingrese el pais de residencia del cliente: "; cin >> pais;
 
-				// Datos de prueba para facilitar la evaluacion
-                id = "3";
-                nombre = "Juan Perez";
-				pais = "Costa Rica";
 				cliente = new ClienteNormal(nombre, id, pais);
 				sucursalActual->getContenedorClientes()->ingresarCliente(cliente);
 				cout << "Cliente agregado exitosamente!" << endl;
@@ -216,20 +212,20 @@ void InterfazUsuario::menuClientes() {
 					system("pause");
 					continue; // Volver al inicio del bucle para intentar de nuevo
 				}
-				//cout << "Ingrese el ID del cliente: "; cin >> id;
-				//if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
-				//	cout << "Error: Ya existe un cliente con esa ID.\n";
-				//	system("pause");
-				//	continue; // Volver al inicio del bucle para intentar de nuevo
-				//}
-				//cin.ignore(); 
+				cout << "Ingrese el ID del cliente: "; cin >> id;
+				if (sucursalActual->getContenedorClientes()->getClienteXId(id)) {
+					cout << "Error: Ya existe un cliente con esa ID.\n";
+					system("pause");
+					continue; // Volver al inicio del bucle para intentar de nuevo
+				}
+				cin.ignore(); 
 
-				/*cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
-               cout << "Ingrese el país de residencia del cliente: "; cin >> pais;
+				cout << "Ingrese el nombre del cliente: "; getline(cin, nombre);
+               cout << "Ingrese el pais de residencia del cliente: "; cin >> pais;
                cout << "Ingrese la actividad economica del cliente: "; cin >> actividadEconomica;
-               cliente = new ClienteJuridico(nombre, id, pais, actividadEconomica);*/
+               cliente = new ClienteJuridico(nombre, id, pais, actividadEconomica);
 	
-                cliente = new ClienteJuridico("Roberto", "1", "Costa Rica", "Panadero");
+
 				sucursalActual->getContenedorClientes()->ingresarCliente(cliente);
 				cout << "Cliente agregado exitosamente!" << endl;
 				cout << "Desea ingresar otro cliente? (s/n): ";
@@ -322,20 +318,15 @@ void InterfazUsuario::menuColaboradores() {
                     system("pause");
                     continue; // Volver al inicio del bucle para intentar de nuevo
 				}
-				//cout << "Ingrese el nombre del colaborador: "; cin >> nombre;
-				//cout << "Ingrese el ID del colaborador: "; cin >> id;
-				//cout << "Ingrese la fecha de ingreso del colaborador (DD/MM/AAAA): "; cin >> fechaIngreso;
+				cout << "Ingrese el nombre del colaborador: "; cin >> nombre;
+				cout << "Ingrese el ID del colaborador: "; cin >> id;
+				cout << "Ingrese la fecha de ingreso del colaborador (DD/MM/AAAA): "; cin >> fechaIngreso;
 
-    //            if (sucursalActual->getContenedorColaboradores()->buscarColaborador(id)) {
-    //                cout << "Error: Ya existe un colaborador con esa ID.\n";
-    //                system("pause");
-    //                continue; // Volver al inicio del bucle para intentar de nuevo
-				//}
-				//Colaborador* colaborador = new Colaborador(nombre, id, fechaIngreso);
-                // Datos de prueba para facilitar la evaluacion
-                nombre = "Ana Gomez";
-                id = "C123";
-                fechaIngreso = "01/01/2022";
+                if (sucursalActual->getContenedorColaboradores()->buscarColaborador(id)) {
+                    cout << "Error: Ya existe un colaborador con esa ID.\n";
+                    system("pause");
+                    continue; // Volver al inicio del bucle para intentar de nuevo
+				}
 				Colaborador* colaborador = new Colaborador(nombre, id, fechaIngreso);
 				sucursalActual->getContenedorColaboradores()->agregarColaborador(colaborador);
 				cout << "Colaborador agregado exitosamente!" << endl;
@@ -1155,10 +1146,7 @@ void InterfazUsuario::menuReportesClientes() {
                 if (!sucursal) {
                     cout << "Error: Sucursal no encontrada.\n";
                 }
-               /* Reporte de clientes por cantidad de contratos : Ordena en la lista los
-                    clientes por cantidad de alquileres realizados, iniciando por el cliente
-                    que más alquileres haya hecho.Debe incluir el id y el nombre del
-                    cliente, así como el código de los contratos de alquiler realizados. hazlo de esta manera y logica */
+              
 				sucursal->getContenedorClientes()->reporteClientesPorCantidadContratos(sucursal->getContenedorContratoAlquiler());  
 
 
